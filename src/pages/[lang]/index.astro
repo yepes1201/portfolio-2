@@ -1,0 +1,18 @@
+---
+// Dependencies
+import type { GetStaticPaths } from "astro";
+
+// Components
+import Welcome from "../../components/Welcome.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (() => {
+  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
+}) satisfies GetStaticPaths;
+
+const { lang } = Astro.params;
+---
+
+<Layout lang={lang}>
+  <Welcome />
+</Layout>
