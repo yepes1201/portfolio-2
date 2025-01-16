@@ -1,20 +1,20 @@
 @font-face {
   font-family: "Neue Machine";
-  src: url("/src/assets/fonts/NeueMachina-Light.otf");
+  src: url("/src/assets/fonts/neue/NeueMachina-Light.otf");
   font-weight: 200;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Machine";
-  src: url("/src/assets/fonts/NeueMachina-Regular.otf");
+  src: url("/src/assets/fonts/neue/NeueMachina-Regular.otf");
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Neue Machine";
-  src: url("/src/assets/fonts/NeueMachina-Ultrabold.otf");
+  src: url("/src/assets/fonts/neue/NeueMachina-Ultrabold.otf");
   font-weight: 700;
   font-style: normal;
 }

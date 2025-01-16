@@ -5,6 +5,8 @@ import type { GetStaticPaths } from "astro";
 // Components
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
+import Hero from "../../components/Hero.astro";
+import AboutMe from "../../components/AboutMe.astro";
 
 export const getStaticPaths = (() => {
   return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
@@ -14,5 +16,9 @@ const { lang } = Astro.params;
 ---
 
 <Layout lang={lang}>
-  <Header />
+  <main class="flex flex-col w-full">
+    <Header />
+    <Hero />
+    <AboutMe />
+  </main>
 </Layout>
