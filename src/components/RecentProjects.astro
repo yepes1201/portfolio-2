@@ -1,0 +1,22 @@
+---
+import RecentProjectsItem from "./utils/RecentProjectsItem.astro";
+---
+
+<section class="container mx-auto flex flex-col gap-20 px-12 py-20">
+  <h1 class="text-6xl">Recent Projects</h1>
+  <ul class="flex flex-col gap-8">
+    <li>
+      <RecentProjectsItem />
+    </li>
+    <li>
+      <RecentProjectsItem />
+    </li>
+    <li>
+      <RecentProjectsItem />
+    </li>
+  </ul>
+  <button class="text-primary-1 text-xl font-light items-center self-end">
+    <span class="bg-primary-3 px-5 py-[14px] rounded-full"> More work </span>
+    <span class="bg-primary-3 px-5 py-[14px] rounded-full">→</span>
+  </button>
+</section>
