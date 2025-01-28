@@ -3,9 +3,7 @@ import Layout from "../../../layouts/Layout.astro";
 import HeroWork from "./_components/HeroWork.astro";
 import WorkContainer from "./_components/WorkContainer.astro";
 
-export function getStaticPaths() {
-  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
-}
+export const prerender = false;
 
 const { lang } = Astro.params;
 ---
