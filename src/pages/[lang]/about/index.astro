@@ -1,0 +1,14 @@
+---
+// Components & Layouts
+import Layout from "../../../layouts/Layout.astro";
+
+export const prerender = false;
+
+const { lang } = Astro.params;
+---
+
+<Layout lang={lang}>
+  <section class="container mx-auto py-32">
+    <h1>About Me</h1>
+  </section>
+</Layout>
