@@ -1,0 +1,32 @@
+---
+// Dependencies
+import { Image } from "astro:assets";
+
+import recentProjectsBg from "../../../../assets/recentproject-default.png";
+import Skill from "../../../../components/utils/Skill.astro";
+---
+
+<div class="flex flex-col gap-4 md:max-w-[436px] col-span-4">
+  <div class="relative">
+    <Image
+      src={recentProjectsBg}
+      class="w-full h-full object-cover"
+      alt="Recent Projects"
+      loading="lazy"
+      format="webp"
+      decoding="async"
+    />
+    <span
+      class="bg-primary-3 px-5 py-[14px] h-fit rounded-full absolute right-4 bottom-4"
+      >→</span
+    >
+  </div>
+  <h3 class="text-4xl">ASTRA</h3>
+  <div class="flex gap-4 items-center flex-wrap">
+    <Skill> React </Skill>
+    <Skill> .NET Web API </Skill>
+    <Skill> C# </Skill>
+    <Skill> PostgreSQL </Skill>
+    <Skill> IBM DB2 </Skill>
+  </div>
+</div>

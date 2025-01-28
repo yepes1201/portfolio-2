@@ -1,0 +1,21 @@
+---
+// Dependencies
+import { Image } from "astro:assets";
+
+import aboutMe from "../../../../assets/about-me.png";
+---
+
+<!-- TODO: responsive -->
+<section id="hero_work">
+  <div class="container mx-auto py-32 h-[50dvh] flex items-end relative">
+    <h1 class="uppercase text-6xl">Work</h1>
+    <Image
+      src={aboutMe}
+      class="absolute bottom-4 -right-10 object-cover"
+      alt="About Me"
+      loading="lazy"
+      format="webp"
+      decoding="async"
+    />
+  </div>
+</section>
