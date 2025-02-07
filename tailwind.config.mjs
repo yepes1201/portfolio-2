@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         neue: ["Neue Machine", "sans-serif"],
+        satoshi: ["Satoshi", "sans-serif"],
       },
       colors: {
         "primary-1": "#151515",
