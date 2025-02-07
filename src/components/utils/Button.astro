@@ -1,0 +1,45 @@
+---
+// Dependencies
+import { Icon } from "astro-icon/components";
+
+// Utils
+import { cn } from "../../lib/utils/tw.utils";
+
+type Icons = "arrow-right-up" | "arrow-right" | "download" | "mail-open";
+
+interface Props extends astroHTML.JSX.ButtonHTMLAttributes {
+  icon?: Icons;
+  containerClass?: string;
+}
+
+const {
+  class: className,
+  icon,
+  children,
+  containerClass,
+  ...props
+} = Astro.props;
+---
+
+<button
+  {...props}
+  class={cn(
+    "text-primary-1 text-xl font-light flex items-center",
+    containerClass
+  )}
+>
+  {
+    Astro.slots.has("default") && (
+      <span class={cn("bg-primary-3 p-5 rounded-full", className)}>
+        <slot />
+      </span>
+    )
+  }
+  {
+    icon && (
+      <span class={cn("bg-primary-3 p-5 rounded-full", className)}>
+        <Icon class="w-6 h-6" name={icon} />
+      </span>
+    )
+  }
+</button>

@@ -4,28 +4,34 @@ import { Image } from "astro:assets";
 
 // Assets
 import decoratorImage from "../assets/about-me.png";
+import Button from "./utils/Button.astro";
+
+const { lang } = Astro.params;
 ---
 
 <section
   id="about-me"
   class="bg-primary-4 relative -top-12 rounded-t-[40px] flex flex-col items-center [&>*]:font-sans"
 >
-  <div class="container mx-auto flex flex-col w-full px-12 py-36">
-    <div class="flex flex-col gap-4">
-      <p class="font-satoshi text-primary-1 text-[30px] max-w-[50%] font-light">
+  <div class="container mx-auto flex flex-col w-full px-12 pt-24 pb-8 md:py-36">
+    <div
+      class="flex flex-col gap-4 md:items-start items-center text-center md:text-start"
+    >
+      <p
+        class="font-satoshi text-primary-1 text-2xl md:text-3xl lg:max-w-[50%] font-light"
+      >
         Specialized in building full-stack systems. Always striving to create
         high-quality and scalable digital products. Currently developing the new
         institutional web application for the Universidad Autónoma del Caribe.
         Expert in languages and technologies such as C#, JavaScript, .NET,
         React, and PostgreSQL.
       </p>
-      <a
-        class="bg-primary-3 text-primary-1 text-[20px] px-[20px] py-[14px] rounded-full font-light flex gap-2 items-center w-fit"
-        >More about me</a
-      >
+      <a href=`/${lang}/about`>
+        <Button icon="arrow-right"> More about me </Button>
+      </a>
     </div>
     <Image
-      class="absolute right-12 bottom-0 w-[482px]"
+      class="md:block hidden absolute right-12 bottom-0 w-[482px]"
       src={decoratorImage}
       alt="About me"
     />

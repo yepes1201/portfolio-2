@@ -1,5 +1,7 @@
 ---
 const { lang } = Astro.params;
+
+const isInPage = Astro.url.pathname;
 ---
 
 <header
@@ -10,10 +12,10 @@ const { lang } = Astro.params;
       <h1>Portfolio</h1>
     </a>
     <nav class="flex gap-4 items-center font-satoshi text-lg">
-      <a href=`/${lang}` class="hover:underline">Home</a>
-      <a href=`/${lang}/about` class="hover:underline">About me</a>
-      <a href=`/${lang}/projects` class="hover:underline">Projects</a>
-      <a href=`/${lang}/#footer` class="hover:underline">Contact</a>
+      <a href=`/${lang}` class=`hover:underline`>Home</a>
+      <a href=`/${lang}/about` class=`hover:underline`>About me</a>
+      <a href=`/${lang}/projects` class=`hover:underline`>Projects</a>
+      <a href=`/${lang}/#footer` class=`hover:underline`>Contact</a>
       <a href="#" class="hover:underline opacity-50 cursor-not-allowed">Blog</a>
     </nav>
   </div>
