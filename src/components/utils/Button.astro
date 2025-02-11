@@ -5,7 +5,13 @@ import { Icon } from "astro-icon/components";
 // Utils
 import { cn } from "../../lib/utils/tw.utils";
 
-type Icons = "arrow-right-up" | "arrow-right" | "download" | "mail-open";
+type Icons =
+  | "arrow-right-up"
+  | "arrow-right"
+  | "download"
+  | "mail-open"
+  | "increase"
+  | "menu-hamburger";
 
 interface Props extends astroHTML.JSX.ButtonHTMLAttributes {
   icon?: Icons;

@@ -7,6 +7,8 @@ import Layout from "../../../layouts/Layout.astro";
 
 // Assets
 import meWorking from "../../../assets/me-working.jpg";
+import Skill from "../../../components/utils/Skill.astro";
+import Button from "../../../components/utils/Button.astro";
 
 export const prerender = false;
 
@@ -15,6 +17,7 @@ const { lang } = Astro.params;
 
 <Layout>
   <section class="container mx-auto py-32 px-4 md:px-8">
+    <!-- About Section -->
     <div class="flex justify-between gap-8 flex-col sm:flex-row items-center">
       <div
         class="flex-1 flex flex-col gap-4 order-2 lg:order-1 text-center sm:text-start"
@@ -28,12 +31,14 @@ const { lang } = Astro.params;
           <p class="text-primary-2 text-xl font-satoshi">Software Engineer</p>
         </div>
 
-        <p class="text-xl md:text-2xl font-satoshi">
+        <p class="text-xl md:text-2xl font-satoshi max-w-[650px] text-pretty">
           Specialized in building full-stack systems. Always striving to create
           high-quality and scalable digital products. Currently developing the
           new institutional web application for the Universidad Autónoma del
-          Caribe. Expert in languages and technologies such as C#, JavaScript,
-          .NET, React, and PostgreSQL.
+          Caribe. Expert in languages and technologies such as <b>C#</b>, <b
+            >JavaScript</b
+          >,
+          <b>.NET</b>, <b>React</b>, and <b>PostgreSQL</b>.
         </p>
       </div>
       <Image
@@ -42,32 +47,198 @@ const { lang } = Astro.params;
         alt="Me"
       />
     </div>
+    <!-- Work Experience -->
     <div class="py-32">
       <h2 class="text-4xl pb-4">Work Experience</h2>
       <hr />
       <div>
-        <!-- Timeline component -->
+        <ol class="relative border-s border-primary-3 mt-8">
+          <li class="mb-10 ms-4 font-satoshi">
+            <div
+              class="absolute w-3 h-3 bg-primary-3 rounded-full mt-1.5 -start-1.5 border border-white"
+            >
+            </div>
+            <time class="mb-1 text-md font-normal leading-none text-primary-2"
+              >March 2022 - Now</time
+            >
+            <h3 class="text-2xl font-semibold text-primary-1">
+              Software Devloper at Universidad Autónoma del Caribe
+            </h3>
+            <div class="flex flex-col gap-10">
+              <div class="flex flex-col gap-4">
+                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
+                  Team leader of Astra project. A new platform designed for
+                  students, teachers, and administrative users, built using
+                  React. Responsible for implementing architecture,
+                  documentation, authentication system, logs reporting and
+                  additional features.
+                </p>
+                <div class="flex gap-4 flex-wrap max-w-[600px]">
+                  <Skill>React</Skill>
+                  <Skill>Typescript</Skill>
+                  <Skill>Tailwind CSS</Skill>
+                  <Skill>C#</Skill>
+                  <Skill>ASP.NET</Skill>
+                  <Skill>PostgreSQL</Skill>
+                  <Skill>IBM DB2</Skill>
+                  <Skill>Git</Skill>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
+                  Built a loan installment calculation system. The system
+                  calculates interest, the number of installments, total
+                  payments made, and the remaining balance, all in accordance
+                  with the amortization schedule.
+                </p>
+                <div class="flex gap-4 flex-wrap max-w-[600px]">
+                  <Skill>.NET Framework</Skill>
+                  <Skill>C#</Skill>
+                  <Skill>JavaScript</Skill>
+                  <Skill>ASP.NET</Skill>
+                  <Skill>PostgreSQL</Skill>
+                  <Skill>IBM DB2</Skill>
+                  <Skill>Git</Skill>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
+                  Developed a Syllabus System for the University. Managed course
+                  information, including details about teachers, class content,
+                  knowledge objectives, skills to develop, and book authors
+                  related to the class content.
+                </p>
+                <div class="flex gap-4 flex-wrap max-w-[600px]">
+                  <Skill>.NET Framework</Skill>
+                  <Skill>C#</Skill>
+                  <Skill>JavaScript</Skill>
+                  <Skill>ASP.NET</Skill>
+                  <Skill>PostgreSQL</Skill>
+                  <Skill>IBM DB2</Skill>
+                  <Skill>Git</Skill>
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
+                  Developed a comprehensive consultation system for
+                  psychologists. Designed and implemented the database, enabling
+                  the tracking of patient history and consultations. Implemented
+                  a feature for authorized users, based on their roles, to
+                  download reports.
+                </p>
+                <div class="flex gap-4 flex-wrap max-w-[600px]">
+                  <Skill>.NET Framework</Skill>
+                  <Skill>C#</Skill>
+                  <Skill>JavaScript</Skill>
+                  <Skill>ASP.NET</Skill>
+                  <Skill>PostgreSQL</Skill>
+                  <Skill>IBM DB2</Skill>
+                  <Skill>Git</Skill>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
       </div>
     </div>
-    <div class="py-32">
+    <!-- Education -->
+    <div class="pb-32">
       <h2 class="text-4xl pb-4">Education</h2>
       <hr />
-      <div>
-        <!-- Timeline component -->
+      <div class="flex flex-col gap-10 mt-8">
+        <div class="font-satoshi flex gap-1 flex-col">
+          <span class="text-sm text-primary-2">2022 - 2025</span>
+          <h3 class="text-lg text-primary-1">System Engineer</h3>
+          <p class="text-xl">
+            <b class="text-primary-1">Universidad Autónoma del Caribe</b> - Barranquilla,
+            Colombia
+          </p>
+          <div class="flex gap-4 flex-wrap max-w-[600px]">
+            <Skill>Time management</Skill>
+            <Skill>Leadership</Skill>
+            <Skill>Communication</Skill>
+            <Skill>Teamwork</Skill>
+            <Skill>Problem-solving</Skill>
+            <Skill>Design</Skill>
+            <Skill>Development</Skill>
+            <Skill>Testing</Skill>
+            <Skill>C#</Skill>
+            <Skill>ASP.NET</Skill>
+            <Skill>PostgreSQL</Skill>
+            <Skill>Oracle</Skill>
+            <Skill>Git</Skill>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="py-32">
+    <!-- Certifications -->
+    <div class="pb-32">
       <h2 class="text-4xl pb-4">Certifications</h2>
       <hr />
-      <div>
-        <!-- Timeline component -->
+      <div class="flex flex-col gap-8 mt-8">
+        <a
+          href="https://www.linkedin.com/learning/certificates/1a9b2b4e1e0e8c7e2f1c8c7e2f1c8c7e"
+          target="_blank"
+          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
+        >
+          <div>
+            <h3 class="text-xl font-bold">TypeScript Essential</h3>
+            <p class="text-primary-2">Issued by LinkedIn Learning</p>
+          </div>
+          <Button icon="increase" />
+        </a>
+        <a
+          href="https://www.udemy.com/certificate/UC-6d7b0c6b-2b9f-4b1a-9b7e-2c4f1c8c7e2f/"
+          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
+          target="_blank"
+        >
+          <div>
+            <h3 class="text-xl font-bold">React PRO</h3>
+            <p class="text-primary-2">Issued by Udemy</p>
+          </div>
+          <Button icon="increase" />
+        </a>
+        <a
+          href="https://www.udemy.com/certificate/UC-6d7b0c6b-2b9f-4b1a-9b7e-2c4f1c8c7e2f/"
+          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
+          target="_blank"
+        >
+          <div>
+            <h3 class="text-xl font-bold">The Complete 2022 Web Development</h3>
+            <p class="text-primary-2">Issued by Udemy</p>
+          </div>
+          <Button icon="increase" />
+        </a>
       </div>
     </div>
-    <div class="py-32">
+    <!-- Skills -->
+    <div class="pb-32">
       <h2 class="text-4xl pb-4">Skills</h2>
       <hr />
-      <div>
-        <!-- Timeline component -->
+      <div class="flex flex-wrap gap-4 mt-8">
+        <Skill>HTML</Skill>
+        <Skill>CSS</Skill>
+        <Skill>JavaScript</Skill>
+        <Skill>TypeScript</Skill>
+        <Skill>React</Skill>
+        <Skill>Next.js</Skill>
+        <Skill>Astro</Skill>
+        <Skill>Node.js</Skill>
+        <Skill>Express.js</Skill>
+        <Skill>C#</Skill>
+        <Skill>ASP.NET</Skill>
+        <Skill>.NET Framework</Skill>
+        <Skill>.NET Core</Skill>
+        <Skill>SQL</Skill>
+        <Skill>PostgreSQL</Skill>
+        <Skill>IBM DB2</Skill>
+        <Skill>MongoDB</Skill>
+        <Skill>Git</Skill>
+        <Skill>Tailwind CSS</Skill>
+        <Skill>RESTful APIs</Skill>
+        <Skill>Agile Methodologies</Skill>
+        <Skill>Test-Driven Development</Skill>
+        <Skill>CI/CD</Skill>
       </div>
     </div>
   </section>
