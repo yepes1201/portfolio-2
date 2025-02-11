@@ -14,11 +14,13 @@ const { lang } = Astro.params;
 ---
 
 <Layout>
-  <section class="container mx-auto py-32">
-    <div class="flex justify-between gap-4 items-center">
-      <div class="flex-1 flex flex-col gap-4">
+  <section class="container mx-auto py-32 px-4 md:px-8">
+    <div class="flex justify-between gap-8 flex-col sm:flex-row items-center">
+      <div
+        class="flex-1 flex flex-col gap-4 order-2 lg:order-1 text-center sm:text-start"
+      >
         <span
-          class="uppercase text-xl text-primary-2 rounded-full px-5 py-4 border border-primary-2 w-fit font-satoshi"
+          class="uppercase text-xl text-primary-2 rounded-full px-5 py-4 border border-primary-2 w-fit font-satoshi self-center sm:self-start"
           >About me</span
         >
         <div>
@@ -26,7 +28,7 @@ const { lang } = Astro.params;
           <p class="text-primary-2 text-xl font-satoshi">Software Engineer</p>
         </div>
 
-        <p class="text-2xl max-w-[50%] font-satoshi">
+        <p class="text-xl md:text-2xl font-satoshi">
           Specialized in building full-stack systems. Always striving to create
           high-quality and scalable digital products. Currently developing the
           new institutional web application for the Universidad Autónoma del
@@ -35,7 +37,7 @@ const { lang } = Astro.params;
         </p>
       </div>
       <Image
-        class="flex-1 max-w-[500px] max-h-[500px] object-cover rounded-3xl shadow-2xl"
+        class="flex-1 max-w-[200px] max-h-[200px] sm:max-h-full md:max-w-[400px] md:max-h-[400px] object-cover rounded-3xl shadow-2xl order-1 lg:order-2"
         src={meWorking}
         alt="Me"
       />
