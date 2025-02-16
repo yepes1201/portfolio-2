@@ -1,6 +1,7 @@
 ---
-import { Icon } from "astro-icon/components";
+// Components
 import Button from "./utils/Button.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <footer id="footer" class="bg-primary-1 text-primary-4 rounded-t-[40px]">
@@ -23,6 +24,18 @@ import Button from "./utils/Button.astro";
           />
         </div>
         <div class="flex flex-col gap-1">
+          <label class="text-primary-3 text-xl md:text-3xl" for="subject"
+            >Subject</label
+          >
+          <input
+            class="bg-transparent pb-2 border-primary-2 border-b text-base md:text-2xl placeholder:text-primary-2 focus:outline-none"
+            type="text"
+            id="subject"
+            name="subject"
+            placeholder="Subject"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="email"
             >Email</label
           >
@@ -39,13 +52,14 @@ import Button from "./utils/Button.astro";
             >Message</label
           >
           <textarea
-            class="bg-transparent pb-2 border-primary-2 border rounded-2xl resize-none h-[200px] p-2 text-base md:text-2xl placeholder:text-primary-2 focus:outline-none font-satoshi"
+            class="bg-transparent pb-2 border-primary-2 border rounded-2xl resize-none h-[200px] p-2 text-lg md:text-xl placeholder:text-primary-2 focus:outline-none font-satoshi"
             id="message"
             name="message"
-            placeholder="Your message"></textarea>
+            placeholder="Brief description of your project"></textarea>
         </div>
         <div class="self-center w-full sm:w-fit sm:self-end">
           <Button
+            type="submit"
             containerClass="w-full sm:w-fit justify-center sm:justify-start"
             class="flex items-center gap-2 sm:w-fit w-full justify-center sm:justify-start text-base md:text-xl"
           >
@@ -81,3 +95,24 @@ import Button from "./utils/Button.astro";
     </div>
   </div>
 </footer>
+
+<script>
+  import { actions } from "astro:actions";
+
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const { error } = await actions.send(formData);
+
+      if (error) {
+        // TODO: display error
+        return;
+      }
+
+      // TODO: display success
+      form.reset();
+    });
+  }
+</script>
