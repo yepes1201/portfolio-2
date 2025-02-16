@@ -7,7 +7,7 @@ const isInPage = Astro.url.pathname;
 ---
 
 <header
-  class="fixed top-0 left-0 w-full py-8 px-4 md:px-12 bg-primary-4 border-b border-primary-3 z-50"
+  class="fixed top-0 left-0 w-full py-8 px-4 md:px-12 bg-primary-4 border-b border-primary-3 z-50 shadow-sm"
 >
   <div class="container mx-auto flex justify-between items-center">
     <a href="/">
@@ -26,4 +26,53 @@ const isInPage = Astro.url.pathname;
       <Icon name="menu-hamburger" class="w-6 h-6" />
     </div>
   </div>
+  <div id="mobile-menu" class="mt-4 pt-4 hidden animate-slideDown border-t">
+    <nav class="flex flex-col gap-4 items-center font-satoshi text-lg">
+      <a href=`/${lang}` class=`w-full hover:underline`>Home</a>
+      <a href=`/${lang}/about` class=`w-full hover:underline`>About me</a>
+      <a href=`/${lang}/projects` class=`w-full hover:underline`>Projects</a>
+      <a href=`/${lang}/#footer` class=`w-full hover:underline`>Contact</a>
+      <a href="#" class="w-full hover:underline opacity-50 cursor-not-allowed"
+        >Blog</a
+      >
+    </nav>
+  </div>
 </header>
+
+<style>
+  .animate-slideDown {
+    transition: all 0.5s ease;
+    animation: slideDown 0.5s ease;
+  }
+
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  const menu = document.getElementById("mobile-menu");
+  const menuToggle = document.querySelector(".border");
+  const navLinks = document.querySelectorAll("nav a");
+
+  if (menuToggle && menu) {
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.add("hidden");
+      });
+    });
+  }
+</script>
