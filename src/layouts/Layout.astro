@@ -3,6 +3,9 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
+// Styles
+import "../styles/setup.css";
+
 const { lang } = Astro.params;
 ---
 
@@ -12,7 +15,6 @@ const { lang } = Astro.params;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href="/src/styles/setup.css" />
     <meta name="generator" content={Astro.generator} />
     <title>Daniel Yepes - Software Engineer</title>
   </head>
