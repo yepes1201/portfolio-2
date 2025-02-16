@@ -10,7 +10,7 @@ import { Icon } from "astro-icon/components";
       <h3 class="text-4xl md:text-8xl lg:text-9xl md:max-w-[100px] self-center">
         Let's talk
       </h3>
-      <form class="flex flex-col gap-4 md:w-1/3 font-satoshi">
+      <form class="flex flex-col gap-4 md:gap-6 md:w-1/3 font-satoshi">
         <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="name"
             >Name</label
@@ -21,7 +21,6 @@ import { Icon } from "astro-icon/components";
             id="name"
             name="name"
             placeholder="Your name"
-            value="Hola"
           />
         </div>
         <div class="flex flex-col gap-1">
@@ -34,7 +33,6 @@ import { Icon } from "astro-icon/components";
             id="subject"
             name="subject"
             placeholder="Subject"
-            value="Hola"
           />
         </div>
         <div class="flex flex-col gap-1">
@@ -47,7 +45,6 @@ import { Icon } from "astro-icon/components";
             id="email"
             name="email"
             placeholder="example@mail.com"
-            value="Hola@mail.com"
           />
         </div>
         <div class="flex flex-col gap-1">
@@ -58,8 +55,7 @@ import { Icon } from "astro-icon/components";
             class="bg-transparent pb-2 border-primary-2 border rounded-2xl resize-none h-[200px] p-2 text-lg md:text-xl placeholder:text-primary-2 focus:outline-none font-satoshi"
             id="message"
             name="message"
-            placeholder="Brief description of your project">Hola</textarea
-          >
+            placeholder="Brief description of your project"></textarea>
         </div>
         <div class="self-center w-full sm:w-fit sm:self-end">
           <Button
