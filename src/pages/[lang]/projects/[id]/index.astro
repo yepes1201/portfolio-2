@@ -10,19 +10,21 @@ const { lang, id } = Astro.params;
 
 <Layout>
   <section
-    class="container mx-auto py-16 justify-end h-[70dvh] flex flex-col gap-4"
+    class="container mx-auto px-4 md:px-12 py-16 mt-24 justify-end flex flex-col gap-4"
   >
     <span
       class="px-5 py-4 w-fit border border-primary-2 rounded-full text-primary-2 font-satoshi"
     >
       CASE STUDY
     </span>
-    <h2 class="text-6xl">ASTRA</h2>
-    <div class="flex justify-between gap-32 mt-8 font-satoshi">
+    <h2 class="text-4xl md:text-6xl">ASTRA</h2>
+    <div
+      class="flex justify-between flex-col md:flex-row gap-8 md:gap-12 lg:gap-24 mt-8 font-satoshi"
+    >
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-[34px]">About project</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">About project</h5>
         <hr />
-        <p class="text-xl">
+        <p class="text-lg lg:text-xl text-primary-2">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit.
           Reprehenderit nesciunt quae nobis velit molestias, distinctio aperiam
           eaque dicta totam voluptatibus, itaque quo corrupti nisi quidem quod
@@ -30,16 +32,18 @@ const { lang, id } = Astro.params;
         </p>
       </div>
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-[34px]">Service</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">Services</h5>
         <hr />
-        <p class="text-xl">Service</p>
+        <p class="text-lg lg:text-xl text-primary-2">Service</p>
       </div>
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-[34px]">Industry</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">Industry</h5>
         <hr />
-        <p class="text-xl">Education</p>
+        <p class="text-lg lg:text-xl text-primary-2">Education</p>
       </div>
     </div>
   </section>
-  <section class="container mx-auto py-32 flex flex-col gap-4">Gallery</section>
+  <section class="container mx-auto px-4 md:px-12 py-16 flex flex-col gap-4">
+    Gallery
+  </section>
 </Layout>
