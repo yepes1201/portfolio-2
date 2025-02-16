@@ -16,7 +16,7 @@ const { lang } = Astro.params;
 ---
 
 <Layout>
-  <section class="container mx-auto py-32 px-4 md:px-8">
+  <section class="container mx-auto py-32 pb-12 md:pb-32 px-4 md:px-8">
     <!-- About Section -->
     <div class="flex justify-between gap-8 flex-col sm:flex-row items-center">
       <div
@@ -27,7 +27,7 @@ const { lang } = Astro.params;
           >About me</span
         >
         <div>
-          <h2 class="text-5xl">Daniel Yepes</h2>
+          <h2 class="text-4xl md:text-5xl">Daniel Yepes</h2>
           <p class="text-primary-2 text-xl font-satoshi">Software Engineer</p>
         </div>
 
@@ -48,8 +48,8 @@ const { lang } = Astro.params;
       />
     </div>
     <!-- Work Experience -->
-    <div class="py-32">
-      <h2 class="text-4xl pb-4">Work Experience</h2>
+    <div class="py-32 pb-16 md:pb-32">
+      <h2 class="text-3xl md:text-4xl pb-4">Work Experience</h2>
       <hr />
       <div>
         <ol class="relative border-s border-primary-3 mt-8">
@@ -142,8 +142,8 @@ const { lang } = Astro.params;
       </div>
     </div>
     <!-- Education -->
-    <div class="pb-32">
-      <h2 class="text-4xl pb-4">Education</h2>
+    <div class="pb-16 md:pb-32">
+      <h2 class="text-3xl md:text-4xl pb-4">Education</h2>
       <hr />
       <div class="flex flex-col gap-10 mt-8">
         <div class="font-satoshi flex gap-1 flex-col">
@@ -172,8 +172,8 @@ const { lang } = Astro.params;
       </div>
     </div>
     <!-- Certifications -->
-    <div class="pb-32">
-      <h2 class="text-4xl pb-4">Certifications</h2>
+    <div class="pb-16 md:pb-32">
+      <h2 class="text-3xl md:text-4xl pb-4">Certifications</h2>
       <hr />
       <div class="flex flex-col gap-8 mt-8">
         <a
@@ -212,8 +212,8 @@ const { lang } = Astro.params;
       </div>
     </div>
     <!-- Skills -->
-    <div class="pb-32">
-      <h2 class="text-4xl pb-4">Skills</h2>
+    <div class="pb-4 md:pb-32">
+      <h2 class="text-3xl md:text-4xl pb-4">Skills</h2>
       <hr />
       <div class="flex flex-wrap gap-4 mt-8">
         <Skill>HTML</Skill>
