@@ -14,15 +14,15 @@ const { lang } = Astro.params;
 
 <a href={`/${lang}/projects/${1}`}>
   <article
-    class="flex flex-col lg:flex-row gap-6 lg:items-center border-b border-gray-300 pb-10"
+    class="relative flex flex-col lg:flex-row gap-4 md:gap-6 lg:items-center border-b border-gray-300 pb-6 md:pb-10"
   >
     <Image
       src={recentProjectDefault}
       alt="Recent Project Default"
       class="w-full md:w-2/3 lg:w-auto"
     />
-    <div class="flex flex-col gap-4">
-      <h2 class="text-3xl font-bold font-satoshi">ASTRA</h2>
+    <div class="flex flex-col gap-2 md:gap-4">
+      <h2 class="text-xl md:text-3xl font-bold font-satoshi">ASTRA</h2>
       <ul class="flex gap-2 text-xl flex-wrap">
         <li>
           <Skill> React </Skill>
