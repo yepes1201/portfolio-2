@@ -7,6 +7,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
+// TODO: implement rate limiter
 export const server = {
   send: defineAction({
     accept: "form",
