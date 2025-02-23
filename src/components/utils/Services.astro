@@ -1,5 +1,18 @@
 ---
 import ServicesCard from "./ServicesCard.astro";
+
+const getServices = async () => {
+  try {
+    const res = await fetch("https://cms.danielyepes.com/items/services");
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const {data} = await getServices();
+console.log(data)
 ---
 
 <section
@@ -9,17 +22,12 @@ import ServicesCard from "./ServicesCard.astro";
   <ul
     class="flex gap-16 md:gap-8 flex-wrap justify-center md:text-start text-center md:justify-between w-full"
   >
-    <li>
-      <ServicesCard />
-    </li>
-    <li>
-      <ServicesCard />
-    </li>
-    <li>
-      <ServicesCard />
-    </li>
-    <li>
-      <ServicesCard />
-    </li>
+  {data.map((service: any) => {
+    return (
+      <li>
+        <ServicesCard title={service.title} items={service.items} />
+      </li>
+    )
+  })}
   </ul>
 </section>
