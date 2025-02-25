@@ -10,15 +10,24 @@ import Services from "../../components/utils/Services.astro";
 import RecentProjects from "../../components/RecentProjects.astro";
 import Blog from "../../components/Blog.astro";
 
-export const getStaticPaths = (() => {
-  return [{ params: { lang: "en" } }, { params: { lang: "es" } }];
-}) satisfies GetStaticPaths;
+// Utils
+import { ENV } from "../../lib/config/env";
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/home_texts/1`).then((res) =>
+  res.json()
+);
 ---
 
 <Layout>
-  <Hero />
-  <AboutMe />
-  <Services />
-  <RecentProjects />
-  <Blog />
+  <Hero btn_downloadcv={data.btn_downloadcv} />
+  <AboutMe btn_moreaboutme={data.more_aboutme} />
+  <Services title_services={data.title_services} />
+  <RecentProjects
+    title_projects={data.title_projects}
+    btn_morework={data.btn_morework}
+  />
+  <Blog
+    title_blog={data.title_blog}
+    text_blog_working={data.text_blog_working}
+  />
 </Layout>

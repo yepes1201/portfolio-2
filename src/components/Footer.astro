@@ -2,6 +2,13 @@
 // Components
 import Button from "./utils/Button.astro";
 import { Icon } from "astro-icon/components";
+
+// Utils
+import { ENV } from "../lib/config/env";
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/footer_texts`).then((res) =>
+  res.json()
+);
 ---
 
 <footer id="footer" class="bg-primary-1 text-primary-4 rounded-t-[40px]">
@@ -16,49 +23,49 @@ import { Icon } from "astro-icon/components";
         </p>
         <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="name"
-            >Name</label
+            >{data.label_name}</label
           >
           <input
             class="bg-transparent pb-2 border-primary-2 border-b text-base md:text-2xl placeholder:text-primary-2 focus:outline-none"
             type="text"
             id="name"
             name="name"
-            placeholder="Your name"
+            placeholder={data.placeholder_name}
           />
         </div>
         <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="subject"
-            >Subject</label
+            >{data.label_subject}</label
           >
           <input
             class="bg-transparent pb-2 border-primary-2 border-b text-base md:text-2xl placeholder:text-primary-2 focus:outline-none"
             type="text"
             id="subject"
             name="subject"
-            placeholder="Subject"
+            placeholder={data.placeholder_subject}
           />
         </div>
         <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="email"
-            >Email</label
+            >{data.label_email}</label
           >
           <input
             class="bg-transparent pb-2 border-primary-2 border-b text-base md:text-2xl placeholder:text-primary-2 focus:outline-none"
             type="email"
             id="email"
             name="email"
-            placeholder="example@mail.com"
+            placeholder={data.placeholder_email}
           />
         </div>
         <div class="flex flex-col gap-1">
           <label class="text-primary-3 text-xl md:text-3xl" for="email"
-            >Message</label
+            >{data.label_message}</label
           >
           <textarea
             class="bg-transparent pb-2 border-primary-2 border rounded-2xl resize-none h-[200px] p-2 text-lg md:text-xl placeholder:text-primary-2 focus:outline-none font-satoshi"
             id="message"
             name="message"
-            placeholder="Brief description of your project"></textarea>
+            placeholder={data.placeholder_message}></textarea>
         </div>
         <div class="self-center w-full sm:w-fit sm:self-end">
           <Button
@@ -66,7 +73,7 @@ import { Icon } from "astro-icon/components";
             containerClass="w-full sm:w-fit justify-center sm:justify-start"
             class="flex items-center gap-2 sm:w-fit w-full justify-center sm:justify-start text-base md:text-xl"
           >
-            Send form
+            {data.btn_send_form}
             <Icon class="w-5 h-5 md:h-6 md:w-6" name="mail-open" />
           </Button>
         </div>

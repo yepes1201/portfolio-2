@@ -1,11 +1,27 @@
 ---
+// Dependencies
+import { Image } from "astro:assets";
+
+// Components
 import Layout from "../../../../layouts/Layout.astro";
+import Skill from "../../../../components/utils/Skill.astro";
+
+// Utils
+import { ENV } from "../../../../lib/config/env";
 
 export const prerender = false;
 
 const { lang, id } = Astro.params;
 
-// TODO: get data from database
+const [dataProjects, dataProjectsUniqueTexts] = await Promise.all([
+  fetch(
+    `${ENV.CMS_ITEMS_URL}/projects/${id}?fields[]=*,gallery.*,skills.*.*`
+  ).then((res) => res.json()),
+  fetch(`${ENV.CMS_ITEMS_URL}/projects_unique_texts`).then((res) => res.json()),
+]);
+
+const { data } = dataProjects;
+const { data: dataUniqueTexts } = dataProjectsUniqueTexts;
 ---
 
 <Layout>
@@ -17,33 +33,59 @@ const { lang, id } = Astro.params;
     >
       CASE STUDY
     </span>
-    <h2 class="text-4xl md:text-6xl">ASTRA</h2>
+    <h2 class="text-4xl md:text-6xl">{data.title}</h2>
     <div
       class="flex justify-between flex-col md:flex-row gap-8 md:gap-12 lg:gap-24 mt-8 font-satoshi"
     >
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-xl md:text-2xl lg:text-3xl">About project</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">
+          {dataUniqueTexts.text_about}
+        </h5>
         <hr />
         <p class="text-lg lg:text-xl text-primary-2">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Reprehenderit nesciunt quae nobis velit molestias, distinctio aperiam
-          eaque dicta totam voluptatibus, itaque quo corrupti nisi quidem quod
-          veritatis. Nemo, illum itaque?
+          {data.about}
         </p>
       </div>
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-xl md:text-2xl lg:text-3xl">Services</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">
+          {dataUniqueTexts.text_skills_applied}
+        </h5>
         <hr />
-        <p class="text-lg lg:text-xl text-primary-2">Service</p>
+        <div class="flex flex-wrap gap-4">
+          {
+            data.skills.map((skill: any) => {
+              return <Skill>{skill.skills_id.name}</Skill>;
+            })
+          }
+        </div>
       </div>
       <div class="flex-1 flex flex-col gap-4">
-        <h5 class="text-xl md:text-2xl lg:text-3xl">Industry</h5>
+        <h5 class="text-xl md:text-2xl lg:text-3xl">
+          {dataUniqueTexts.text_industry}
+        </h5>
         <hr />
-        <p class="text-lg lg:text-xl text-primary-2">Education</p>
+        <p class="text-lg lg:text-xl text-primary-2">{data.industry}</p>
       </div>
     </div>
   </section>
   <section class="container mx-auto px-4 md:px-12 py-16 flex flex-col gap-4">
-    Gallery
+    <div class="flex flex-wrap gap-4">
+      {
+        data.gallery.map((item: any) => {
+          return (
+            <Image
+              server:defer
+              format="webp"
+              decoding="async"
+              src={`https://cms.danielyepes.com/assets/${item.directus_files_id}`}
+              alt={data.title}
+              class="w-full lg:w-[calc(50%-1rem)] object-cover rounded-xl"
+              width={400}
+              height={400}
+            />
+          );
+        })
+      }
+    </div>
   </section>
 </Layout>

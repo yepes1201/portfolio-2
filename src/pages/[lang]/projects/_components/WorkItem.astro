@@ -6,34 +6,44 @@ import { Image } from "astro:assets";
 import Skill from "../../../../components/utils/Skill.astro";
 import Button from "../../../../components/utils/Button.astro";
 
-// Assets
-import recentProjectsBg from "../../../../assets/recentproject-default.png";
+// Utils
+import { ENV } from "../../../../lib/config/env";
+
+interface Props {
+  id: number;
+  title: string;
+  thumbnail: string;
+  skills: any[];
+}
 
 const { lang } = Astro.params;
+const { id, title, thumbnail, skills } = Astro.props;
 ---
 
 <div class="md:max-w-[436px] col-span-4 font-satoshi">
-  <a class="flex flex-col gap-4" href={`/${lang}/projects/${1}`}>
+  <a class="flex flex-col gap-4" href={`/${lang}/projects/${id}`}>
     <div class="relative">
       <Image
-        src={recentProjectsBg}
-        class="w-full h-full object-cover"
+        src={`${ENV.CMS_ASSETS_URL}/${thumbnail}`}
+        class="w-full h-full object-cover rounded-xl"
         alt="Recent Projects"
         loading="lazy"
         format="webp"
         decoding="async"
+        width={400}
+        height={400}
       />
       <div class="absolute right-4 bottom-4">
         <Button icon="arrow-right-up" />
       </div>
     </div>
-    <h3 class="text-3xl font-bold">ASTRA</h3>
+    <h3 class="text-3xl font-bold">{title}</h3>
     <div class="flex gap-4 items-center flex-wrap">
-      <Skill> React </Skill>
-      <Skill> .NET Web API </Skill>
-      <Skill> C# </Skill>
-      <Skill> PostgreSQL </Skill>
-      <Skill> IBM DB2 </Skill>
+      {
+        skills.map((skill: any) => {
+          return <Skill>{skill.skills_id.name}</Skill>;
+        })
+      }
     </div>
   </a>
 </div>

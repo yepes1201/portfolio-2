@@ -2,10 +2,24 @@
 // Dependencies
 import { Image } from "astro:assets";
 
-// Assets
-import decoratorImage from "../assets/about-me.png";
+// Compoentns
 import Button from "./utils/Button.astro";
 
+// Assets
+import decoratorImage from "../assets/about-me.png";
+
+// Utils
+import { ENV } from "../lib/config/env";
+
+interface Props {
+  btn_moreaboutme: string;
+}
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/aboutme/1`).then((res) =>
+  res.json()
+);
+
+const { btn_moreaboutme } = Astro.props;
 const { lang } = Astro.params;
 ---
 
@@ -21,15 +35,10 @@ const { lang } = Astro.params;
     >
       <p
         class="font-satoshi text-primary-1 text-xl md:text-3xl lg:max-w-[50%] font-light"
-      >
-        Specialized in building full-stack systems. Always striving to create
-        high-quality and scalable digital products. Currently developing the new
-        institutional web application for the Universidad Autónoma del Caribe.
-        Expert in languages and technologies such as C#, JavaScript, .NET,
-        React, and PostgreSQL.
-      </p>
+        set:html={data.description}
+      />
       <a href=`/${lang}/about`>
-        <Button icon="arrow-right"> More about me </Button>
+        <Button icon="arrow-right"> {btn_moreaboutme} </Button>
       </a>
     </div>
     <Image

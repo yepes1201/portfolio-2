@@ -5,7 +5,9 @@ import { z } from "astro:schema";
 import { LRUCache } from "lru-cache";
 
 // Config
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
+import { ENV } from "../../lib/config/env";
+
+const resend = new Resend(ENV.RESEND_API_KEY);
 const rt = new LRUCache<string, any>({
   max: 5000,
   ttl: 86400000,

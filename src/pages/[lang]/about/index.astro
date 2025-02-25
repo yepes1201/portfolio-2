@@ -10,9 +10,38 @@ import meWorking from "../../../assets/me-working.jpg";
 import Skill from "../../../components/utils/Skill.astro";
 import Button from "../../../components/utils/Button.astro";
 
+// Utils
+import { ENV } from "../../../lib/config/env";
+
 export const prerender = false;
 
+const [about, aboutText, education, skills, certifications, workExperience] =
+  await Promise.all([
+    fetch(`${ENV.CMS_ITEMS_URL}/aboutme/1`).then((res) => res.json()),
+    fetch(`${ENV.CMS_ITEMS_URL}/about_texts`).then((res) => res.json()),
+    fetch(`${ENV.CMS_ITEMS_URL}/education?fields[]=*,skills.*.*`).then((res) =>
+      res.json()
+    ),
+    fetch(`${ENV.CMS_ITEMS_URL}/skills?fields[]=*,skills.*.*`).then((res) =>
+      res.json()
+    ),
+    fetch(`${ENV.CMS_ITEMS_URL}/certifications`).then((res) => res.json()),
+    fetch(`${ENV.CMS_ITEMS_URL}/work_experience?fields[]=*,skills.*.*`).then(
+      (res) => res.json()
+    ),
+  ]);
+
+const { data } = about;
+const { data: dataText } = aboutText;
+const { data: dataEducation } = education;
+const { data: dataSkills } = skills;
+const { data: dataCertifications } = certifications;
+const { data: dataWorkExperience } = workExperience;
+
+console.log(workExperience);
+
 const { lang } = Astro.params;
+const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
 ---
 
 <Layout>
@@ -24,22 +53,17 @@ const { lang } = Astro.params;
       >
         <span
           class="uppercase text-xl text-primary-2 rounded-full px-5 py-4 border border-primary-2 w-fit font-satoshi self-center sm:self-start"
-          >About me</span
+          >{data.title}</span
         >
         <div>
           <h2 class="text-4xl md:text-5xl">Daniel Yepes</h2>
-          <p class="text-primary-2 text-xl font-satoshi">Software Engineer</p>
+          <p class="text-primary-2 text-xl font-satoshi">{data.career}</p>
         </div>
 
-        <p class="text-xl md:text-2xl font-satoshi max-w-[650px] text-pretty">
-          Specialized in building full-stack systems. Always striving to create
-          high-quality and scalable digital products. Currently developing the
-          new institutional web application for the Universidad Autónoma del
-          Caribe. Expert in languages and technologies such as <b>C#</b>, <b
-            >JavaScript</b
-          >,
-          <b>.NET</b>, <b>React</b>, and <b>PostgreSQL</b>.
-        </p>
+        <p
+          set:html={data.description}
+          class="text-xl md:text-2xl font-satoshi max-w-[650px] text-pretty"
+        />
       </div>
       <Image
         class="flex-1 max-w-[200px] max-h-[200px] sm:max-h-full md:max-w-[400px] md:max-h-[400px] object-cover rounded-3xl shadow-2xl order-1 lg:order-2"
@@ -49,196 +73,113 @@ const { lang } = Astro.params;
     </div>
     <!-- Work Experience -->
     <div class="py-32 pb-16 md:pb-32">
-      <h2 class="text-3xl md:text-4xl pb-4">Work Experience</h2>
+      <h2 class="text-3xl md:text-4xl pb-4">{dataText.text_work_experience}</h2>
       <hr />
       <div>
         <ol class="relative border-s border-primary-3 mt-8">
-          <li class="mb-10 ms-4 font-satoshi">
-            <div
-              class="absolute w-3 h-3 bg-primary-3 rounded-full mt-1.5 -start-1.5 border border-white"
-            >
-            </div>
-            <time class="mb-1 text-md font-normal leading-none text-primary-2"
-              >March 2022 - Now</time
-            >
-            <h3 class="text-2xl font-semibold text-primary-1">
-              Software Devloper at Universidad Autónoma del Caribe
-            </h3>
-            <div class="flex flex-col gap-10">
-              <div class="flex flex-col gap-4">
-                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
-                  Team leader of Astra project. A new platform designed for
-                  students, teachers, and administrative users, built using
-                  React. Responsible for implementing architecture,
-                  documentation, authentication system, logs reporting and
-                  additional features.
-                </p>
-                <div class="flex gap-4 flex-wrap max-w-[600px]">
-                  <Skill>React</Skill>
-                  <Skill>Typescript</Skill>
-                  <Skill>Tailwind CSS</Skill>
-                  <Skill>C#</Skill>
-                  <Skill>ASP.NET</Skill>
-                  <Skill>PostgreSQL</Skill>
-                  <Skill>IBM DB2</Skill>
-                  <Skill>Git</Skill>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4">
-                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
-                  Built a loan installment calculation system. The system
-                  calculates interest, the number of installments, total
-                  payments made, and the remaining balance, all in accordance
-                  with the amortization schedule.
-                </p>
-                <div class="flex gap-4 flex-wrap max-w-[600px]">
-                  <Skill>.NET Framework</Skill>
-                  <Skill>C#</Skill>
-                  <Skill>JavaScript</Skill>
-                  <Skill>ASP.NET</Skill>
-                  <Skill>PostgreSQL</Skill>
-                  <Skill>IBM DB2</Skill>
-                  <Skill>Git</Skill>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4">
-                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
-                  Developed a Syllabus System for the University. Managed course
-                  information, including details about teachers, class content,
-                  knowledge objectives, skills to develop, and book authors
-                  related to the class content.
-                </p>
-                <div class="flex gap-4 flex-wrap max-w-[600px]">
-                  <Skill>.NET Framework</Skill>
-                  <Skill>C#</Skill>
-                  <Skill>JavaScript</Skill>
-                  <Skill>ASP.NET</Skill>
-                  <Skill>PostgreSQL</Skill>
-                  <Skill>IBM DB2</Skill>
-                  <Skill>Git</Skill>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4">
-                <p class="text-lg font-normal text-primary-2 max-w-[600px]">
-                  Developed a comprehensive consultation system for
-                  psychologists. Designed and implemented the database, enabling
-                  the tracking of patient history and consultations. Implemented
-                  a feature for authorized users, based on their roles, to
-                  download reports.
-                </p>
-                <div class="flex gap-4 flex-wrap max-w-[600px]">
-                  <Skill>.NET Framework</Skill>
-                  <Skill>C#</Skill>
-                  <Skill>JavaScript</Skill>
-                  <Skill>ASP.NET</Skill>
-                  <Skill>PostgreSQL</Skill>
-                  <Skill>IBM DB2</Skill>
-                  <Skill>Git</Skill>
-                </div>
-              </div>
-            </div>
-          </li>
+          {
+            dataWorkExperience.map((item: any) => {
+              return (
+                <li class="mb-10 ms-4 font-satoshi">
+                  <div class="absolute w-3 h-3 bg-primary-3 rounded-full mt-1.5 -start-1.5 border border-white" />
+                  <time class="mb-1 text-md font-normal leading-none text-primary-2 capitalize">
+                    {new Intl.DateTimeFormat(dateTimeFormat, {
+                      month: "long",
+                      year: "numeric",
+                    }).format(new Date(item.start_date))}{" "}
+                    -{" "}
+                    {item.end_year
+                      ? new Intl.DateTimeFormat(dateTimeFormat, {
+                          month: "long",
+                          year: "numeric",
+                        }).format(new Date(item.end_year))
+                      : lang === "es"
+                        ? "Ahora"
+                        : "Now"}
+                  </time>
+                  <h3 class="text-2xl font-semibold text-primary-1">
+                    {item.position} at {item.company}
+                  </h3>
+                  <div class="flex flex-col gap-4">
+                    <p
+                      class="text-lg font-normal text-primary-2 max-w-[600px]"
+                      set:html={item.description}
+                    />
+                    <div class="max-w-[600px] flex gap-4 flex-wrap">
+                      {item.skills.map((skill: any) => {
+                        return <Skill>{skill.skills_id.name}</Skill>;
+                      })}
+                    </div>
+                  </div>
+                </li>
+              );
+            })
+          }
         </ol>
       </div>
     </div>
     <!-- Education -->
     <div class="pb-16 md:pb-32">
-      <h2 class="text-3xl md:text-4xl pb-4">Education</h2>
+      <h2 class="text-3xl md:text-4xl pb-4">{dataText.text_education}</h2>
       <hr />
       <div class="flex flex-col gap-10 mt-8">
-        <div class="font-satoshi flex gap-1 flex-col">
-          <span class="text-sm text-primary-2">2022 - 2025</span>
-          <h3 class="text-lg text-primary-1">System Engineer</h3>
-          <p class="text-xl">
-            <b class="text-primary-1">Universidad Autónoma del Caribe</b> - Barranquilla,
-            Colombia
-          </p>
-          <div class="flex gap-4 flex-wrap max-w-[600px]">
-            <Skill>Time management</Skill>
-            <Skill>Leadership</Skill>
-            <Skill>Communication</Skill>
-            <Skill>Teamwork</Skill>
-            <Skill>Problem-solving</Skill>
-            <Skill>Design</Skill>
-            <Skill>Development</Skill>
-            <Skill>Testing</Skill>
-            <Skill>C#</Skill>
-            <Skill>ASP.NET</Skill>
-            <Skill>PostgreSQL</Skill>
-            <Skill>Oracle</Skill>
-            <Skill>Git</Skill>
-          </div>
-        </div>
+        {
+          dataEducation.map((item: any) => {
+            return (
+              <div class="font-satoshi flex gap-1 flex-col">
+                <span class="text-sm text-primary-2">
+                  {item.start_year} - {item.end_year}
+                </span>
+                <h3 class="text-lg text-primary-1">{item.course}</h3>
+                <p class="text-xl">
+                  <b class="text-primary-1">{item.school}</b>
+                  {item.city ? ` - ${item.city}` : ``}
+                </p>
+                <div class="flex gap-4 flex-wrap max-w-[600px]">
+                  {item.skills.map((skill: any) => {
+                    return <Skill>{skill.skills_id.name}</Skill>;
+                  })}
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
     </div>
     <!-- Certifications -->
     <div class="pb-16 md:pb-32">
-      <h2 class="text-3xl md:text-4xl pb-4">Certifications</h2>
+      <h2 class="text-3xl md:text-4xl pb-4">{dataText.text_certification}</h2>
       <hr />
       <div class="flex flex-col gap-8 mt-8">
-        <a
-          href="https://www.linkedin.com/learning/certificates/1a9b2b4e1e0e8c7e2f1c8c7e2f1c8c7e"
-          target="_blank"
-          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
-        >
-          <div>
-            <h3 class="text-xl font-bold">TypeScript Essential</h3>
-            <p class="text-primary-2">Issued by LinkedIn Learning</p>
-          </div>
-          <Button icon="increase" />
-        </a>
-        <a
-          href="https://www.udemy.com/certificate/UC-6d7b0c6b-2b9f-4b1a-9b7e-2c4f1c8c7e2f/"
-          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
-          target="_blank"
-        >
-          <div>
-            <h3 class="text-xl font-bold">React PRO</h3>
-            <p class="text-primary-2">Issued by Udemy</p>
-          </div>
-          <Button icon="increase" />
-        </a>
-        <a
-          href="https://www.udemy.com/certificate/UC-6d7b0c6b-2b9f-4b1a-9b7e-2c4f1c8c7e2f/"
-          class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
-          target="_blank"
-        >
-          <div>
-            <h3 class="text-xl font-bold">The Complete 2022 Web Development</h3>
-            <p class="text-primary-2">Issued by Udemy</p>
-          </div>
-          <Button icon="increase" />
-        </a>
+        {
+          dataCertifications.map((item: any) => {
+            return (
+              <a
+                href={item.url}
+                target="_blank"
+                class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
+              >
+                <div>
+                  <h3 class="text-xl font-bold">{item.course}</h3>
+                  <p class="text-primary-2">{item.issued_by}</p>
+                </div>
+                <Button icon="increase" />
+              </a>
+            );
+          })
+        }
       </div>
     </div>
     <!-- Skills -->
     <div class="pb-4 md:pb-32">
-      <h2 class="text-3xl md:text-4xl pb-4">Skills</h2>
+      <h2 class="text-3xl md:text-4xl pb-4">{dataText.text_skills}</h2>
       <hr />
       <div class="flex flex-wrap gap-4 mt-8">
-        <Skill>HTML</Skill>
-        <Skill>CSS</Skill>
-        <Skill>JavaScript</Skill>
-        <Skill>TypeScript</Skill>
-        <Skill>React</Skill>
-        <Skill>Next.js</Skill>
-        <Skill>Astro</Skill>
-        <Skill>Node.js</Skill>
-        <Skill>Express.js</Skill>
-        <Skill>C#</Skill>
-        <Skill>ASP.NET</Skill>
-        <Skill>.NET Framework</Skill>
-        <Skill>.NET Core</Skill>
-        <Skill>SQL</Skill>
-        <Skill>PostgreSQL</Skill>
-        <Skill>IBM DB2</Skill>
-        <Skill>MongoDB</Skill>
-        <Skill>Git</Skill>
-        <Skill>Tailwind CSS</Skill>
-        <Skill>RESTful APIs</Skill>
-        <Skill>Agile Methodologies</Skill>
-        <Skill>Test-Driven Development</Skill>
-        <Skill>CI/CD</Skill>
+        {
+          dataSkills.map((item: any) => {
+            return <Skill>{item.name}</Skill>;
+          })
+        }
       </div>
     </div>
   </section>

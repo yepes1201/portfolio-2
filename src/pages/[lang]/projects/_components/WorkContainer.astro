@@ -1,5 +1,13 @@
 ---
+// Components
 import WorkItem from "./WorkItem.astro";
+
+// Utils
+import { ENV } from "../../../../lib/config/env";
+
+const { data } = await fetch(
+  `${ENV.CMS_ITEMS_URL}/projects?fields[]=*,gallery.*,skills.*.*`
+).then((res) => res.json());
 ---
 
 <!-- TODO: responsive -->
@@ -7,10 +15,10 @@ import WorkItem from "./WorkItem.astro";
   <div
     class="container mx-auto grid px-4 md:grid-cols-8 lg:grid-cols-12 gap-8 gap-y-12"
   >
-    <WorkItem />
-    <WorkItem />
-    <WorkItem />
-    <WorkItem />
-    <WorkItem />
+    {
+      data.map((item: any) => {
+        return <WorkItem {...item} />;
+      })
+    }
   </div>
 </section>

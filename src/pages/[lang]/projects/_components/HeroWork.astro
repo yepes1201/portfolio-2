@@ -2,7 +2,15 @@
 // Dependencies
 import { Image } from "astro:assets";
 
+// Assets
 import aboutMe from "../../../../assets/about-me.png";
+
+// Utils
+import { ENV } from "../../../../lib/config/env";
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/projects_texts`).then(
+  (res) => res.json()
+);
 ---
 
 <!-- TODO: responsive -->
@@ -10,7 +18,7 @@ import aboutMe from "../../../../assets/about-me.png";
   <div
     class="container mx-auto py-8 md:py-32 mt-32 flex items-end relative px-4"
   >
-    <h1 class="uppercase text-4xl md:text-6xl">Projects</h1>
+    <h1 class="uppercase text-4xl md:text-6xl">{data.text_title}</h1>
     <Image
       src={aboutMe}
       class="hidden md:block absolute bottom-4 -right-0 xl:right-4 object-cover"

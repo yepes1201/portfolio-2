@@ -3,6 +3,19 @@
 import Button from "./utils/Button.astro";
 import RecentProjectsItem from "./utils/RecentProjectsItem.astro";
 
+// Utils
+import { ENV } from "../lib/config/env";
+
+interface Props {
+  title_projects: string;
+  btn_morework: string;
+}
+
+const { data } = await fetch(
+  `${ENV.CMS_ITEMS_URL}/projects?fields[]=*,gallery.*,skills.*.*`
+).then((res) => res.json());
+
+const { title_projects, btn_morework } = Astro.props;
 const { lang } = Astro.params;
 ---
 
@@ -10,19 +23,19 @@ const { lang } = Astro.params;
   id="projects"
   class="container mx-auto flex flex-col gap-12 md:gap-20 px-4 md:px-12 py-20 md:items-start"
 >
-  <h1 class="text-4xl md:text-6xl">Recent Projects</h1>
+  <h1 class="text-4xl md:text-6xl">{title_projects}</h1>
   <ul class="flex flex-col gap-8 md:items-start items-center">
-    <li>
-      <RecentProjectsItem />
-    </li>
-    <li>
-      <RecentProjectsItem />
-    </li>
-    <li>
-      <RecentProjectsItem />
-    </li>
+    {
+      data.map((item: any) => {
+        return (
+          <li>
+            <RecentProjectsItem {...item} />
+          </li>
+        );
+      })
+    }
   </ul>
   <a href=`/${lang}/projects` class="self-center md:self-end">
-    <Button icon="arrow-right-up"> More Work </Button>
+    <Button icon="arrow-right-up"> {btn_morework} </Button>
   </a>
 </section>

@@ -1,5 +1,19 @@
 ---
+// Components
 import Button from "./utils/Button.astro";
+
+// Utils
+import { ENV } from "../lib/config/env";
+
+interface Props {
+  btn_downloadcv: string;
+}
+
+const { btn_downloadcv } = Astro.props;
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/aboutme/1`).then((res) =>
+  res.json()
+);
 ---
 
 <section id="hero" class="h-[90dvh] text-primary-4 w-full content-end">
@@ -10,11 +24,11 @@ import Button from "./utils/Button.astro";
       Daniel Yepes
     </h1>
     <p class="font-satoshi text-xl md:text-3xl text-primary-3">
-      Software Engineer
+      {data.career}
     </p>
     <div class="w-full flex justify-center lg:justify-end">
       <Button icon="download" class="font-satoshi bg-primary-4">
-        Download CV
+        {btn_downloadcv}
       </Button>
     </div>
   </div>

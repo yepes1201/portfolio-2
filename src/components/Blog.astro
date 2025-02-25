@@ -1,13 +1,20 @@
 ---
 import BlogItem from "./utils/BlogItem.astro";
+
+interface Props {
+  title_blog: string;
+  text_blog_working: string;
+}
+
+const { title_blog, text_blog_working } = Astro.props;
 ---
 
 <section class="container mx-auto flex flex-col gap-12 md:gap-20 px-12 py-20">
-  <h1 class="text-4xl md:text-6xl">Blog</h1>
+  <h1 class="text-4xl md:text-6xl">{title_blog}</h1>
   <div
     class="flex justify-center items-center border border-dashed p-32 rounded-xl font-satoshi border-primary-3"
   >
-    <p class="text-xl md:text-3xl text-primary-2">Working...</p>
+    <p class="text-xl md:text-3xl text-primary-2">{text_blog_working}</p>
   </div>
   <!-- <ul class="flex gap-8 flex-wrap">
     <li>

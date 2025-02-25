@@ -5,44 +5,48 @@ import { Image } from "astro:assets";
 // Components
 import Skill from "../utils/Skill.astro";
 import Button from "./Button.astro";
+import { ENV } from "../../lib/config/env";
 
-// Assets
-import recentProjectDefault from "../../assets/recentproject-default.png";
+interface Props {
+  id: number;
+  thumbnail: string;
+  title: string;
+  about: string;
+  skills: any[];
+}
 
 const { lang } = Astro.params;
+const { thumbnail, title, about, skills, id } = Astro.props;
 ---
 
-<a href={`/${lang}/projects/${1}`}>
+<a href={`/${lang}/projects/${id}`}>
   <article
     class="relative flex flex-col lg:flex-row gap-4 md:gap-6 lg:items-center border-b border-gray-300 pb-6 md:pb-10"
   >
     <Image
-      src={recentProjectDefault}
+      src={`${ENV.CMS_ASSETS_URL}/${thumbnail}`}
       alt="Recent Project Default"
-      class="w-full md:w-2/3 lg:w-auto"
+      width={20}
+      height={20}
+      format="webp"
+      decoding="async"
+      class="max-h-[300px] md:w-2/3 lg:w-auto rounded-xl"
+      server:defer
     />
     <div class="flex flex-col gap-2 md:gap-4">
-      <h2 class="text-xl md:text-3xl font-bold font-satoshi">ASTRA</h2>
+      <h2 class="text-xl md:text-3xl font-bold font-satoshi">{title}</h2>
       <ul class="flex gap-2 text-xl flex-wrap">
-        <li>
-          <Skill> React </Skill>
-        </li>
-        <li>
-          <Skill> TypeScript </Skill>
-        </li>
-        <li>
-          <Skill> Node.js </Skill>
-        </li>
-        <li>
-          <Skill> PostgreSQL </Skill>
-        </li>
+        {
+          skills.map((skill: any) => (
+            <li>
+              <Skill>{skill.skills_id.name}</Skill>
+            </li>
+          ))
+        }
       </ul>
       <div class="flex gap-4 items-center flex-col md:flex-row">
         <p class="text-lg sm:text-xl md:text-2xl w-fit font-satoshi">
-          A new platform designed for students, teachers, and administrative
-          users, built using React. Responsible for implementing architecture,
-          documentation, authentication system, logs reporting and additional
-          features.
+          {about}
         </p>
         <Button icon="arrow-right-up" />
       </div>

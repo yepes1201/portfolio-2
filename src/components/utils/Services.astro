@@ -1,33 +1,36 @@
 ---
+// Components
 import ServicesCard from "./ServicesCard.astro";
 
-const getServices = async () => {
-  try {
-    const res = await fetch("https://cms.danielyepes.com/items/services");
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// Utils
+import { ENV } from "../../lib/config/env";
 
-const {data} = await getServices();
-console.log(data)
+interface Props {
+  title_services: string;
+}
+
+const { title_services } = Astro.props;
+
+const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/services`).then((res) =>
+  res.json()
+);
 ---
 
 <section
   class="container mx-auto flex flex-col gap-20 px-12 py-12 md:py-20 md:items-start items-center"
 >
-  <h1 class="text-4xl md:text-6xl">Services</h1>
+  <h1 class="text-4xl md:text-6xl">{title_services}</h1>
   <ul
     class="flex gap-16 md:gap-8 flex-wrap justify-center md:text-start text-center md:justify-between w-full"
   >
-  {data.map((service: any) => {
-    return (
-      <li>
-        <ServicesCard title={service.title} items={service.items} />
-      </li>
-    )
-  })}
+    {
+      data.map((service: any) => {
+        return (
+          <li>
+            <ServicesCard title={service.title} items={service.items} />
+          </li>
+        );
+      })
+    }
   </ul>
 </section>
