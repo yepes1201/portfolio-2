@@ -10,14 +10,12 @@ import Services from "../../components/utils/Services.astro";
 import RecentProjects from "../../components/RecentProjects.astro";
 import Blog from "../../components/Blog.astro";
 
-// Utils
-import { ENV } from "../../lib/config/env";
+// Services
+import { getHomeTexts } from "../../lib/utils/api.utils";
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/home_texts/1`, {
-  headers: {
-    Authorization: `Bearer ${ENV.CMS_ACCESS_TOKEN}`,
-  },
-}).then((res) => res.json());
+const { data: res } = await getHomeTexts(Astro.params.lang);
+
+const data = res.translations[0];
 ---
 
 <Layout>

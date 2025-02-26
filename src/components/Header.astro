@@ -1,12 +1,12 @@
 ---
+// Components
 import { Icon } from "astro-icon/components";
-import { ENV } from "../lib/config/env";
+
+// Services
+import { getNavItems } from "../lib/utils/api.utils";
 
 const { lang } = Astro.params;
-
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/nav`).then((res) =>
-  res.json()
-);
+const { data } = await getNavItems(lang);
 ---
 
 <header
@@ -19,13 +19,19 @@ const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/nav`).then((res) =>
     <nav class="hidden sm:flex gap-4 items-center font-satoshi text-lg">
       {
         data.map((item: any) => {
-          return (
-            <a href={`/${lang}${item.ref}`} class={`hover:underline`}>
-              {item.name}
-            </a>
-          );
+          return item.translations.map((i: any) => {
+            return (
+              <a href={`/${lang}${item.ref}`} class={`hover:underline`}>
+                {i.name}
+              </a>
+            );
+          });
         })
       }
+      <select id="language-select">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
     </nav>
     <div
       class="cursor-pointer border border-primary-2 rounded-md p-1 sm:hidden"
@@ -42,6 +48,10 @@ const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/nav`).then((res) =>
       <a href="#" class="w-full hover:underline opacity-50 cursor-not-allowed"
         >Blog</a
       >
+      <select id="language-select">
+        <option value="es">ES</option>
+        <option value="en">EN</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -80,6 +90,26 @@ const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/nav`).then((res) =>
       link.addEventListener("click", () => {
         menu.classList.add("hidden");
       });
+    });
+  }
+
+  const currentLang = window.location.pathname.split("/")[1];
+  const select = document.getElementById(
+    "language-select"
+  ) as HTMLSelectElement;
+  if (select) {
+    select.value = currentLang;
+    select.addEventListener("change", (event) => {
+      const target = event.target as HTMLSelectElement;
+      const selectedLang = target.value;
+      const currentPath = window.location.pathname;
+      const newPath = currentPath.replace(
+        /\/([a-z]{2})\//,
+        `/${selectedLang}/`
+      );
+      const url = new URL(window.location.href);
+      url.pathname = newPath;
+      window.location.href = url.href;
     });
   }
 </script>

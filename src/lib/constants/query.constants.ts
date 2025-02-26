@@ -1,0 +1,1 @@
+export const TRANSLATION_SEARCH_QUERY = "deep[translations][_filter][languages_code][_eq]"

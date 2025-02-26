@@ -3,11 +3,10 @@
 import WorkItem from "./WorkItem.astro";
 
 // Utils
-import { ENV } from "../../../../lib/config/env";
+import { getRecentProjects } from "../../../../lib/utils/api.utils";
 
-const { data } = await fetch(
-  `${ENV.CMS_ITEMS_URL}/projects?fields[]=*,gallery.*,skills.*.*`
-).then((res) => res.json());
+const { lang } = Astro.params;
+const { data } = await getRecentProjects(lang);
 ---
 
 <!-- TODO: responsive -->

@@ -10,17 +10,17 @@ import decoratorImage from "../assets/about-me.png";
 
 // Utils
 import { ENV } from "../lib/config/env";
+import { getAboutMe } from "../lib/utils/api.utils";
 
 interface Props {
   btn_moreaboutme: string;
 }
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/aboutme/1`).then((res) =>
-  res.json()
-);
-
 const { btn_moreaboutme } = Astro.props;
-const { lang } = Astro.params;
+
+const lang = Astro.params.lang;
+const { data: res } = await getAboutMe(lang);
+const data = res.translations[0];
 ---
 
 <section

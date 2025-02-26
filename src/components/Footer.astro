@@ -3,12 +3,11 @@
 import Button from "./utils/Button.astro";
 import { Icon } from "astro-icon/components";
 
-// Utils
-import { ENV } from "../lib/config/env";
+// Services
+import { getFooterTexts } from "../lib/utils/api.utils";
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/footer_texts`).then((res) =>
-  res.json()
-);
+const { data: res } = await getFooterTexts(Astro.params.lang);
+const data = res.translations[0];
 ---
 
 <footer id="footer" class="bg-primary-1 text-primary-4 rounded-t-[40px]">
@@ -54,7 +53,7 @@ const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/footer_texts`).then((res) =>
             type="email"
             id="email"
             name="email"
-            placeholder={data.placeholder_email}
+            placeholder={data.placholder_email}
           />
         </div>
         <div class="flex flex-col gap-1">

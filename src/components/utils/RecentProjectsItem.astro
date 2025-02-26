@@ -9,14 +9,13 @@ import { ENV } from "../../lib/config/env";
 
 interface Props {
   id: number;
+  translations: [{ title: string; about: string }];
   thumbnail: string;
-  title: string;
-  about: string;
   skills: any[];
 }
 
 const { lang } = Astro.params;
-const { thumbnail, title, about, skills, id } = Astro.props;
+const { thumbnail, skills, id, translations } = Astro.props;
 ---
 
 <a href={`/${lang}/projects/${id}`}>
@@ -34,7 +33,9 @@ const { thumbnail, title, about, skills, id } = Astro.props;
       server:defer
     />
     <div class="flex flex-col gap-2 md:gap-4">
-      <h2 class="text-xl md:text-3xl font-bold font-satoshi">{title}</h2>
+      <h2 class="text-xl md:text-3xl font-bold font-satoshi">
+        {translations[0].title}
+      </h2>
       <ul class="flex gap-2 text-xl flex-wrap">
         {
           skills.map((skill: any) => (
@@ -46,7 +47,7 @@ const { thumbnail, title, about, skills, id } = Astro.props;
       </ul>
       <div class="flex gap-4 items-center flex-col md:flex-row">
         <p class="text-lg sm:text-xl md:text-2xl w-fit font-satoshi">
-          {about}
+          {translations[0].about}
         </p>
         <Button icon="arrow-right-up" />
       </div>

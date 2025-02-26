@@ -2,8 +2,8 @@
 // Components
 import Button from "./utils/Button.astro";
 
-// Utils
-import { ENV } from "../lib/config/env";
+// Services
+import { getAboutMe } from "../lib/utils/api.utils";
 
 interface Props {
   btn_downloadcv: string;
@@ -11,9 +11,8 @@ interface Props {
 
 const { btn_downloadcv } = Astro.props;
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/aboutme/1`).then((res) =>
-  res.json()
-);
+const { data: res } = await getAboutMe(Astro.params.lang);
+const data = res.translations[0];
 ---
 
 <section id="hero" class="h-[90dvh] text-primary-4 w-full content-end">

@@ -3,20 +3,18 @@
 import Button from "./utils/Button.astro";
 import RecentProjectsItem from "./utils/RecentProjectsItem.astro";
 
-// Utils
-import { ENV } from "../lib/config/env";
+// Services
+import { getRecentProjects } from "../lib/utils/api.utils";
 
 interface Props {
   title_projects: string;
   btn_morework: string;
 }
 
-const { data } = await fetch(
-  `${ENV.CMS_ITEMS_URL}/projects?fields[]=*,gallery.*,skills.*.*`
-).then((res) => res.json());
+const { lang } = Astro.params;
+const { data } = await getRecentProjects(lang);
 
 const { title_projects, btn_morework } = Astro.props;
-const { lang } = Astro.params;
 ---
 
 <section

@@ -6,11 +6,11 @@ import { Image } from "astro:assets";
 import aboutMe from "../../../../assets/about-me.png";
 
 // Utils
-import { ENV } from "../../../../lib/config/env";
+import { getProjectsText } from "../../../../lib/utils/api.utils";
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/projects_texts`).then(
-  (res) => res.json()
-);
+const { lang } = Astro.params;
+const { data: res } = await getProjectsText(lang);
+const data = res.translations[0];
 ---
 
 <!-- TODO: responsive -->

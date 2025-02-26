@@ -2,8 +2,8 @@
 // Components
 import ServicesCard from "./ServicesCard.astro";
 
-// Utils
-import { ENV } from "../../lib/config/env";
+// Services
+import { getServices } from "../../lib/utils/api.utils";
 
 interface Props {
   title_services: string;
@@ -11,9 +11,8 @@ interface Props {
 
 const { title_services } = Astro.props;
 
-const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/services`).then((res) =>
-  res.json()
-);
+const { data } = await getServices(Astro.params.lang);
+// TODO: ajustar traducción de items en la lista
 ---
 
 <section
@@ -24,12 +23,14 @@ const { data } = await fetch(`${ENV.CMS_ITEMS_URL}/services`).then((res) =>
     class="flex gap-16 md:gap-8 flex-wrap justify-center md:text-start text-center md:justify-between w-full"
   >
     {
-      data.map((service: any) => {
-        return (
-          <li>
-            <ServicesCard title={service.title} items={service.items} />
-          </li>
-        );
+      data.map((item: any) => {
+        return item.translations.map((service: any) => {
+          return (
+            <li>
+              <ServicesCard title={service.title} items={service.items} />
+            </li>
+          );
+        });
       })
     }
   </ul>
