@@ -24,7 +24,7 @@ const { id, title, thumbnail, skills } = Astro.props;
   <a class="flex flex-col gap-4" href={`/${lang}/projects/${id}`}>
     <div class="relative">
       <Image
-        src={`${ENV.CMS_ASSETS_URL}/${thumbnail}`}
+        src={`${ENV.CMS_ASSETS_URL}/${thumbnail}?format=webp&quality=80`}
         class="w-full h-full object-cover rounded-xl"
         alt="Recent Projects"
         loading="lazy"

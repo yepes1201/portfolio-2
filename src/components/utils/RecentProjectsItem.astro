@@ -23,14 +23,13 @@ const { thumbnail, skills, id, translations } = Astro.props;
     class="relative flex flex-col lg:flex-row gap-4 md:gap-6 lg:items-center border-b border-gray-300 pb-6 md:pb-10"
   >
     <Image
-      src={`${ENV.CMS_ASSETS_URL}/${thumbnail}`}
+      src={`${ENV.CMS_ASSETS_URL}/${thumbnail}?format=webp&quality=80`}
       alt="Recent Project Default"
       width={20}
       height={20}
       format="webp"
       decoding="async"
       class="max-h-[300px] md:w-2/3 lg:w-auto rounded-xl"
-      server:defer
     />
     <div class="flex flex-col gap-2 md:gap-4">
       <h2 class="text-xl md:text-3xl font-bold font-satoshi">
