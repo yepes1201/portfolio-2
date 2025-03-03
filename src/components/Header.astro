@@ -93,23 +93,37 @@ const { data } = await getNavItems(lang);
     });
   }
 
-  const currentLang = window.location.pathname.split("/")[1];
   const select = document.getElementById(
     "language-select"
   ) as HTMLSelectElement;
   if (select) {
+    // Obtener el idioma actual de la URL o usar 'es' como predeterminado
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    const currentLang =
+      pathParts.length > 0 && pathParts[0].match(/^(es|en)$/)
+        ? pathParts[0]
+        : "es";
+
     select.value = currentLang;
+
     select.addEventListener("change", (event) => {
       const target = event.target as HTMLSelectElement;
       const selectedLang = target.value;
       const currentPath = window.location.pathname;
-      const newPath = currentPath.replace(
-        /\/([a-z]{2})\//,
-        `/${selectedLang}/`
-      );
-      const url = new URL(window.location.href);
-      url.pathname = newPath;
-      window.location.href = url.href;
+
+      // Manejar la página inicial "/"
+      if (currentPath === "/" || currentPath === "") {
+        window.location.href = `/${selectedLang}`;
+        return;
+      }
+
+      // Obtener la ruta sin el código de idioma
+      const pathWithoutLang =
+        pathParts.length > 1 ? "/" + pathParts.slice(1).join("/") : "/";
+
+      // Construir la nueva URL con el idioma seleccionado
+      const newPath = `/${selectedLang}${pathWithoutLang}`;
+      window.location.href = newPath;
     });
   }
 </script>
