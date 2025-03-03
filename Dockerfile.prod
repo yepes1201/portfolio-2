@@ -24,6 +24,10 @@ EXPOSE 4321
 
 # Añadir variable de entorno para asegurar que escuche en todas las interfaces
 ENV HOST=0.0.0.0
+ENV RESEND_API_KEY=${RESEND_API_KEY}
+ENV CMS_ITEMS_URL=${CMS_ITEMS_URL}
+ENV CMS_ASSETS_URL=${CMS_ASSETS_URL}
+ENV CMS_ACCESS_TOKEN=${CMS_ACCESS_TOKEN}
 
 # Ejecutar directamente el servidor de Node.js que genera Astro
 CMD ["node", "./dist/server/entry.mjs"] 
