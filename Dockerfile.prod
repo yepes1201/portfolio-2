@@ -1,0 +1,29 @@
+# Etapa de construcción
+FROM oven/bun:latest as build
+
+WORKDIR /app
+
+COPY package.json bun.lockb ./
+RUN bun install
+
+COPY . .
+RUN bun run build
+
+# Etapa de ejecución
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copiar archivos necesarios
+COPY --from=build /app/dist /app/dist
+COPY --from=build /app/node_modules /app/node_modules
+COPY --from=build /app/package.json /app/
+
+# Exponer puerto
+EXPOSE 4321
+
+# Añadir variable de entorno para asegurar que escuche en todas las interfaces
+ENV HOST=0.0.0.0
+
+# Ejecutar directamente el servidor de Node.js que genera Astro
+CMD ["node", "./dist/server/entry.mjs"] 

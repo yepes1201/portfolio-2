@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # Servicio de la aplicación Astro SSR
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - CMS_ITEMS_URL=${CMS_ITEMS_URL}
+      - CMS_ASSETS_URL=${CMS_ASSETS_URL}
+      - CMS_ACCESS_TOKEN=${CMS_ACCESS_TOKEN}
+    restart: unless-stopped
+
+networks:
+  default:
+    driver: bridge 
