@@ -1,3 +1,6 @@
 ---
-return Astro.redirect("/es");
+import { getPreferredLanguage } from "../lib/utils/query.utils";
+
+const acceptLanguage = Astro.request.headers.get("accept-language") || "";
+return Astro.redirect(`/${getPreferredLanguage(acceptLanguage)}`);
 ---
