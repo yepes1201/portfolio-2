@@ -3,16 +3,23 @@
 import Button from "./utils/Button.astro";
 
 // Services
-import { getAboutMe } from "../lib/utils/api.utils";
+import { getAboutMe, getCv } from "../lib/utils/api.utils";
+
+// Config
+import { ENV } from "../lib/config/env";
 
 interface Props {
   btn_downloadcv: string;
 }
 
 const { btn_downloadcv } = Astro.props;
+const lang = Astro.params.lang;
 
-const { data: res } = await getAboutMe(Astro.params.lang);
+const [about, dataCv] = await Promise.all([getAboutMe(lang), getCv(lang)]);
+const { data: res } = about;
+const { data: resCv } = dataCv;
 const data = res.translations[0];
+const cv_url = resCv.translations[0];
 ---
 
 <section id="hero" class="h-[90dvh] text-primary-4 w-full content-end">
@@ -26,9 +33,11 @@ const data = res.translations[0];
       {data.career}
     </p>
     <div class="w-full flex justify-center lg:justify-end">
-      <Button icon="download" class="font-satoshi bg-primary-4">
-        {btn_downloadcv}
-      </Button>
+      <a href={`${ENV.CMS_ASSETS_URL}/${cv_url.cv}`} target="_blank">
+        <Button icon="download" class="font-satoshi bg-primary-4">
+          {btn_downloadcv}
+        </Button>
+      </a>
     </div>
   </div>
 </section>

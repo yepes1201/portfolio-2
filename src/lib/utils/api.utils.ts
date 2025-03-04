@@ -10,7 +10,7 @@ interface CacheItem {
 }
 
 const apiCache = new Map<string, CacheItem>();
-const DEFAULT_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
+const DEFAULT_TTL = ENV.ENVIRONMENT === "development" ? 1000 : 60 * 60 * 1000; // 1 hour in milliseconds
 
 const fetchWithCache = (
   url: string,
@@ -159,6 +159,13 @@ export const getProjectsUniqueTexts = (lang = "es") => {
   return fetchWithCache(url, getRequestOptions(), cacheKey);
 };
 
+export const getCv = (lang = "es") => {
+  const finalLang = getLang(lang);
+  const url = `${ENV.CMS_ITEMS_URL}/curriculum_vitae?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
+  const cacheKey = `cv_${finalLang}`;
+
+  return fetchWithCache(url, getRequestOptions(), cacheKey);
+};
 // Function to clear the entire cache
 export const clearCache = () => {
   apiCache.clear();

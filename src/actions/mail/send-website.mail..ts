@@ -47,7 +47,6 @@ const sendEmail = defineAction({
     // rt.set(ip, true);
 
     if (error) {
-      console.log(error);
       throw new ActionError({
         code: "BAD_REQUEST",
         message: error.message,
