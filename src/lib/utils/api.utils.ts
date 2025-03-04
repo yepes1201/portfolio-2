@@ -106,7 +106,6 @@ export const getNavItems = (lang = "es") => {
 export const getProjectsText = (lang = "es") => {
   const finalLang = getLang(lang);
   const url = `${ENV.CMS_ITEMS_URL}/projects_texts?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
-  console.log(url);
   const cacheKey = `projects_text_${finalLang}`;
 
   return fetchWithCache(url, getRequestOptions(), cacheKey);
