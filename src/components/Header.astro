@@ -28,7 +28,7 @@ const { data } = await getNavItems(lang);
           });
         })
       }
-      <select id="language-select">
+      <select id="desktop-language-select" class="language-select">
         <option value="es">ES</option>
         <option value="en">EN</option>
       </select>
@@ -48,7 +48,7 @@ const { data } = await getNavItems(lang);
       <a href="#" class="w-full hover:underline opacity-50 cursor-not-allowed"
         >Blog</a
       >
-      <select id="language-select">
+      <select id="mobile-language-select" class="language-select">
         <option value="es">ES</option>
         <option value="en">EN</option>
       </select>
@@ -93,17 +93,19 @@ const { data } = await getNavItems(lang);
     });
   }
 
-  const select = document.getElementById(
-    "language-select"
-  ) as HTMLSelectElement;
-  if (select) {
-    // Obtener el idioma actual de la URL o usar 'es' como predeterminado
-    const pathParts = window.location.pathname.split("/").filter(Boolean);
-    const currentLang =
-      pathParts.length > 0 && pathParts[0].match(/^(es|en)$/)
-        ? pathParts[0]
-        : "es";
+  // Manejar los selectores de idioma
+  const languageSelects =
+    document.querySelectorAll<HTMLSelectElement>(".language-select");
 
+  // Obtener el idioma actual de la URL o usar 'es' como predeterminado
+  const pathParts = window.location.pathname.split("/").filter(Boolean);
+  const currentLang =
+    pathParts.length > 0 && pathParts[0].match(/^(es|en)$/)
+      ? pathParts[0]
+      : "es";
+
+  // Configurar el valor inicial para ambos selectores
+  languageSelects.forEach((select) => {
     select.value = currentLang;
 
     select.addEventListener("change", (event) => {
@@ -125,5 +127,5 @@ const { data } = await getNavItems(lang);
       const newPath = `/${selectedLang}${pathWithoutLang}`;
       window.location.href = newPath;
     });
-  }
+  });
 </script>
