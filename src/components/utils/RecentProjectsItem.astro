@@ -9,13 +9,14 @@ import { ENV } from "../../lib/config/env";
 
 interface Props {
   id: number;
+  title: string;
   translations: [{ title: string; about: string }];
   thumbnail: string;
   skills: any[];
 }
 
 const { lang } = Astro.params;
-const { thumbnail, skills, id, translations } = Astro.props;
+const { thumbnail, skills, id, translations, title } = Astro.props;
 ---
 
 <a href={`/${lang}/projects/${id}`}>
@@ -33,7 +34,7 @@ const { thumbnail, skills, id, translations } = Astro.props;
     />
     <div class="flex flex-col gap-2 md:gap-4">
       <h2 class="text-xl md:text-3xl font-bold font-satoshi">
-        {translations[0].title}
+        {title}
       </h2>
       <ul class="flex gap-2 text-xl flex-wrap">
         {

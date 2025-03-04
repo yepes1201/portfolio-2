@@ -27,7 +27,10 @@ const { data } = await getServices(Astro.params.lang);
         return item.translations.map((service: any) => {
           return (
             <li>
-              <ServicesCard title={service.title} items={service.items} />
+              <ServicesCard
+                title={item.translations[0].name}
+                items={service.items}
+              />
             </li>
           );
         });

@@ -19,6 +19,7 @@ import {
   getCertifications,
   getWorkExperience,
 } from "../../../lib/utils/api.utils";
+import { ENV } from "../../../lib/config/env";
 
 export const prerender = false;
 
@@ -69,7 +70,9 @@ const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
       </div>
       <Image
         class="flex-1 max-w-[200px] max-h-[200px] sm:max-h-full md:max-w-[400px] md:max-h-[400px] object-cover rounded-3xl shadow-2xl order-1 lg:order-2"
-        src={meWorking}
+        src={`${ENV.CMS_ASSETS_URL}/5a6319d7-d509-4c92-a6a4-8565cea295ba?quality=20&format=webp`}
+        width={400}
+        height={400}
         alt="Me"
         decoding="async"
         format="webp"
@@ -91,13 +94,13 @@ const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
                       {new Intl.DateTimeFormat(dateTimeFormat, {
                         month: "long",
                         year: "numeric",
-                      }).format(new Date(item.start_date))}{" "}
+                      }).format(new Date(i.start_date))}{" "}
                       -{" "}
-                      {item.end_date
+                      {i.end_date
                         ? new Intl.DateTimeFormat(dateTimeFormat, {
                             month: "long",
                             year: "numeric",
-                          }).format(new Date(item.end_date))
+                          }).format(new Date(i.end_date))
                         : lang === "es"
                           ? "Ahora"
                           : "Now"}
@@ -111,7 +114,7 @@ const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
                         set:html={item.description}
                       />
                       <div class="max-w-[600px] flex gap-4 flex-wrap">
-                        {item.skills.map((skill: any) => {
+                        {i.skills.map((skill: any) => {
                           return <Skill>{skill.skills_id.name}</Skill>;
                         })}
                       </div>

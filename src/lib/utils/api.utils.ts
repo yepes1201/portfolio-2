@@ -106,6 +106,7 @@ export const getNavItems = (lang = "es") => {
 export const getProjectsText = (lang = "es") => {
   const finalLang = getLang(lang);
   const url = `${ENV.CMS_ITEMS_URL}/projects_texts?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
+  console.log(url);
   const cacheKey = `projects_text_${finalLang}`;
 
   return fetchWithCache(url, getRequestOptions(), cacheKey);
@@ -145,7 +146,7 @@ export const getCertifications = (lang = "es") => {
 
 export const getWorkExperience = (lang = "es") => {
   const finalLang = getLang(lang);
-  const url = `${ENV.CMS_ITEMS_URL}/work_experience?fields[]=translations.*.*.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
+  const url = `${ENV.CMS_ITEMS_URL}/work_experience?fields[]=*,skills.*.*,translations.*.*.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
   const cacheKey = `work_experience_${finalLang}`;
 
   return fetchWithCache(url, getRequestOptions(), cacheKey);
@@ -161,7 +162,7 @@ export const getProjectsUniqueTexts = (lang = "es") => {
 
 export const getCv = (lang = "es") => {
   const finalLang = getLang(lang);
-  const url = `${ENV.CMS_ITEMS_URL}/curriculum_vitae?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
+  const url = `${ENV.CMS_ITEMS_URL}/curriculum_vitae/1?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
   const cacheKey = `cv_${finalLang}`;
 
   return fetchWithCache(url, getRequestOptions(), cacheKey);

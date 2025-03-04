@@ -1,5 +1,5 @@
 export const getLang = (lang = "es") => {
-  return lang === "es" ? "es-CO" : "en-US";
+  return lang === "es" ? "es" : "en";
 };
 
 export const getPreferredLanguage = (acceptLanguage: string = "") => {
