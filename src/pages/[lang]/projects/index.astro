@@ -1,14 +1,19 @@
 ---
+// Components
 import Layout from "../../../layouts/Layout.astro";
 import HeroWork from "./_components/HeroWork.astro";
 import WorkContainer from "./_components/WorkContainer.astro";
 
-export const prerender = false;
+// Services
+import { getProjectsText } from "../../../lib/utils/api.utils";
 
 const { lang } = Astro.params;
+
+const { data: res } = await getProjectsText(lang);
+const data = res.translations[0];
 ---
 
-<Layout>
+<Layout description={data.description} title={data.title_tag}>
   <HeroWork />
   <WorkContainer />
 </Layout>

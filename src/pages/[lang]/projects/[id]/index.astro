@@ -29,7 +29,11 @@ const dataTranslation = data.translations[0];
 const dataUniqueTexts = resDataUniqueTexts.translations[0];
 ---
 
-<Layout>
+<Layout
+  description={dataTranslation.about}
+  image={`${ENV.CMS_ASSETS_URL}/${data.thumbnail}?format=webp&quality=80`}
+  title={`${data.title} | Daniel Yepes`}
+>
   <section
     class="container mx-auto px-4 md:px-12 py-16 mt-24 justify-end flex flex-col gap-4"
   >

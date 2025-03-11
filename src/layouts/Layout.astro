@@ -50,10 +50,7 @@ const data = res.translations[0];
     <title>{title || data.title_page}</title>
     <meta name="description" content={description || data.description} />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="keywords"
-      content="desarrollo software, fullstack, frontend, backend, react, javascript, c#, .net, typescript, html, next.js, astro, desarrollo web, aplicaciones móviles"
-    />
+    <meta name="keywords" content={data.keywords_tag} />
     <meta name="author" content="Daniel Yepes" />
     <meta name="robots" content="index, follow" />
     <meta name="language" content={lang === "es" ? "Spanish" : "English"} />
