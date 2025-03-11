@@ -22,7 +22,7 @@ const { title, description, image } = Astro.props;
 const { lang } = Astro.params;
 
 const { data: res } = await getAboutMe(lang);
-const localImage = ENV.CMS_ASSETS_URL + res.profile;
+const localImage = `${ENV.CMS_ASSETS_URL}/${res.profile}`;
 const data = res.translations[0];
 ---
 
