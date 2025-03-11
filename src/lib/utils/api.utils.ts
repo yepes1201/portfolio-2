@@ -57,7 +57,7 @@ export const getHomeTexts = (lang = "es") => {
 
 export const getAboutMe = (lang = "es") => {
   const finalLang = getLang(lang);
-  const url = `${ENV.CMS_ITEMS_URL}/aboutme/1?fields[]=translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
+  const url = `${ENV.CMS_ITEMS_URL}/aboutme/1?fields[]=profile,translations.*&${TRANSLATION_SEARCH_QUERY}=${finalLang}`;
   const cacheKey = `aboutme_${finalLang}`;
 
   return fetchWithCache(url, getRequestOptions(), cacheKey);

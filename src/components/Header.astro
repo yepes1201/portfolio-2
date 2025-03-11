@@ -13,8 +13,14 @@ const { data } = await getNavItems(lang);
   class="fixed top-0 left-0 w-full py-8 px-4 md:px-12 bg-primary-4 border-b border-primary-3 z-50 shadow-sm"
 >
   <div class="container mx-auto flex justify-between items-center">
-    <a href="/">
-      <h1 class="font-satoshi text-2xl text-primary-1 font-bold">DY</h1>
+    <a href={`/${lang}`}>
+      <h1
+        class="font-satoshi text-xl text-primary-1 font-bold flex items-center gap-2"
+      >
+        <Icon name="code" class="w-5 h-5" />
+        Daniel Yepes
+        <Icon name="code-xml" class="w-6 h-6" />
+      </h1>
     </a>
     <nav class="hidden sm:flex gap-4 items-center font-satoshi text-lg">
       {
@@ -41,10 +47,10 @@ const { data } = await getNavItems(lang);
   </div>
   <div id="mobile-menu" class="mt-4 pt-4 hidden animate-slideDown border-t">
     <nav class="flex flex-col gap-4 items-center font-satoshi text-lg">
-      <a href=`/${lang}` class=`w-full hover:underline`>Home</a>
-      <a href=`/${lang}/about` class=`w-full hover:underline`>About me</a>
-      <a href=`/${lang}/projects` class=`w-full hover:underline`>Projects</a>
-      <a href=`/${lang}/#footer` class=`w-full hover:underline`>Contact</a>
+      <a href={`/${lang}`} class="w-full hover:underline">Home</a>
+      <a href={`/${lang}/about`} class="w-full hover:underline">About me</a>
+      <a href={`/${lang}/projects`} class="w-full hover:underline">Projects</a>
+      <a href={`/${lang}/#footer`} class="w-full hover:underline">Contact</a>
       <a href="#" class="w-full hover:underline opacity-50 cursor-not-allowed"
         >Blog</a
       >

@@ -3,20 +3,81 @@
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 
+// Services
+import { getAboutMe } from "../lib/utils/api.utils";
+
+// Config
+import { ENV } from "../lib/config/env";
+
 // Styles
 import "../styles/setup.css";
 
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title, description, image } = Astro.props;
 const { lang } = Astro.params;
+
+const { data: res } = await getAboutMe(lang);
+const localImage = ENV.CMS_ASSETS_URL + res.profile;
+const data = res.translations[0];
 ---
 
 <!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
+    <!-- Meta Tags Básicos -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/src/icons/code-xml.svg"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/src/icons/code-xml-light.svg"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <!-- Meta Tags de SEO -->
+    <title>{title || data.title_page}</title>
+    <meta name="description" content={description || data.description} />
     <meta name="generator" content={Astro.generator} />
-    <title>Daniel Yepes - Software Engineer</title>
+    <meta
+      name="keywords"
+      content="desarrollo software, fullstack, frontend, backend, react, javascript, c#, .net, typescript, html, next.js, astro, desarrollo web, aplicaciones móviles"
+    />
+    <meta name="author" content="Daniel Yepes" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content={lang === "es" ? "Spanish" : "English"} />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content={title || data.title_page} />
+    <meta property="og:description" content={description || data.description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={image || localImage} />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={`https://danielyepes.com/${lang}/`} />
+    <meta name="twitter:title" content={title || data.title_page} />
+    <meta
+      name="twitter:description"
+      content={description || data.description}
+    />
+    <meta name="twitter:image" content={image || localImage} />
+
+    <!-- Meta Tags para Localización -->
+    <link rel="alternate" hreflang="en" href={`https://danielyepes.com/en/`} />
+    <link rel="alternate" hreflang="es" href={`https://danielyepes.com/es/`} />
+    <link rel="canonical" href={`https://danielyepes.com/${lang}/`} />
   </head>
   <body class="m-0 [&>*]:font-neue">
     <main class="flex flex-col w-full">
