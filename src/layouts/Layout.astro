@@ -31,7 +31,9 @@ const data = res.translations[0];
   <head>
     <meta
       name="google-site-verification"
-      content={ENV.GOOGLE_SITE_VERIFICATION}
+      content={ENV.ENVIRONMENT === "production"
+        ? ENV.GOOGLE_SITE_VERIFICATION
+        : ""}
     />
 
     <!-- Meta Tags Básicos -->
