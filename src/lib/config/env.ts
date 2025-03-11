@@ -1,4 +1,5 @@
 export const ENV = {
+  IS_PROD: import.meta.env.PROD,
   ENVIRONMENT: import.meta.env.ENVIRONMENT,
   RESEND_API_KEY: import.meta.env.RESEND_API_KEY,
   CMS_ITEMS_URL: import.meta.env.CMS_ITEMS_URL,

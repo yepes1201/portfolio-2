@@ -75,6 +75,17 @@ const data = res.translations[0];
     <link rel="alternate" hreflang="en" href={`https://danielyepes.com/en/`} />
     <link rel="alternate" hreflang="es" href={`https://danielyepes.com/es/`} />
     <link rel="canonical" href={`https://danielyepes.com/${lang}/`} />
+
+    <!-- Umami -->
+    {
+      ENV.IS_PROD && (
+        <script
+          defer
+          src="https://analytics.danielyepes.com/script.js"
+          data-website-id="c4b9519c-0f33-4156-b52f-9d7691f30e84"
+        />
+      )
+    }
   </head>
   <body class="m-0 [&>*]:font-neue">
     <main class="flex flex-col w-full">
