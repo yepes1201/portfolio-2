@@ -34,7 +34,7 @@ const cv_url = resCv.translations[0];
     </p>
     <div class="w-full flex justify-center lg:justify-end">
       <a href={`${ENV.CMS_ASSETS_URL}/${cv_url.cv}`} target="_blank">
-        <Button icon="download" class="font-satoshi bg-primary-4">
+        <Button onclick='umami.track("download-cv")' icon="download" class="font-satoshi bg-primary-4">
           {btn_downloadcv}
         </Button>
       </a>

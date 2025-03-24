@@ -39,7 +39,7 @@ const sendEmail = defineAction({
 
     const { data, error } = await resend.emails.send({
       from: `${name} <website@danielyepes.com>`,
-      to: ["yepes1201@gmail.com"],
+      to: ["contact@danielyepes.com"],
       subject: subject,
       html: `<section><p>${message}</p><br/><strong>${name}<br/>${email}</strong></section>`,
     });
