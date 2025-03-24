@@ -34,15 +34,11 @@ const cv_url = resCv.translations[0];
     </p>
     <div class="w-full flex justify-center lg:justify-end">
       <a
-        onclick="umamiTrack('download-cv')"
+        id="download-cv"
         href={`${ENV.CMS_ASSETS_URL}/${cv_url.cv}`}
         target="_blank"
       >
-        <Button
-          id="download-cv"
-          icon="download"
-          class="font-satoshi bg-primary-4"
-        >
+        <Button icon="download" class="font-satoshi bg-primary-4">
           {btn_downloadcv}
         </Button>
       </a>
@@ -52,6 +48,11 @@ const cv_url = resCv.translations[0];
 
 <script>
   import { umamiTrack } from "../lib/utils/global.utils";
+
+  const downloadButton = document.getElementById("download-cv");
+  if (downloadButton) {
+    downloadButton.onclick = () => umamiTrack("download-cv");
+  }
 </script>
 
 <style>
