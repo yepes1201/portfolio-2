@@ -169,6 +169,7 @@ const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
               return (
                 <a
                   href={item.url}
+                  data-name={`certification`}
                   target="_blank"
                   class="flex gap-4 items-center justify-between max-w-[500px] font-satoshi hover:scale-105 transition-all duration-300"
                 >
@@ -198,3 +199,14 @@ const dateTimeFormat = lang === "es" ? "es-CO" : "en-US";
     </div>
   </section>
 </Layout>
+
+<script>
+  import { umamiTrack } from "../../../lib/utils/global.utils";
+
+  const certificationLinks = document.querySelectorAll(
+    '[data-name="certification"]'
+  );
+  certificationLinks.forEach((link) => {
+    link.addEventListener("click", () => umamiTrack("certification"));
+  });
+</script>

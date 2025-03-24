@@ -107,6 +107,7 @@ const data = res.translations[0];
 
 <script>
   import { actions } from "astro:actions";
+  import { umamiTrack } from "../lib/utils/global.utils";
 
   const form = document.querySelector("form");
   const result = document.getElementById("form-result");
@@ -133,6 +134,8 @@ const data = res.translations[0];
         result.classList.remove("invisible");
         return;
       }
+
+      umamiTrack("send-form");
 
       result.classList.remove("bg-red-300/60", "text-red-900");
       result.classList.add("bg-green-300/60", "text-green-900");
